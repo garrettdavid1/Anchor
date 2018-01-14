@@ -34,7 +34,7 @@ export class WeekContainer extends React.Component{
                 return week;
             })
         return (
-            <table id="dayContainer" className="col-sm-9 col-xs-12" style={tableStyles}>
+            <table id="weekContainer" className="col-sm-9 col-xs-12" style={tableStyles}>
                 <tbody>
                     {weeks}
                 </tbody>

@@ -12,6 +12,12 @@ body {
   /* overflow: hidden; */
 }
 
+.widget{
+  display: inline-block;
+  width: 100%;
+  height: auto;
+}
+
 .widget:first-child > div{
   border-top: none !important;
 }

@@ -1,8 +1,8 @@
 import {siteStyles} from '../../../../siteStyles';
 
 export const styles = {
-    height: '100%',
     minHeight: '200px',
+    height: '100%',
     padding: '0px 10px 10px 0px',
     overflow: 'hidden',
     boxSizing: 'border-box',

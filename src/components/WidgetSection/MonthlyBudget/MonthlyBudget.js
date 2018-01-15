@@ -7,8 +7,8 @@ export class MonthlyBudget extends React.Component{
     render(){
         return (
         <div style={styles}>
-            <MonthlyBudgetSummary />
-            <MonthContainer date={this.props.date} />
+            <MonthContainer date={this.props.date} transactions={this.props.transactions} />
+            <MonthlyBudgetSummary transactions={this.props.transactions} />
         </div>
         );
     }

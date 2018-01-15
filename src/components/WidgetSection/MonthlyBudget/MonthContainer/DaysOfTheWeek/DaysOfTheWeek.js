@@ -11,7 +11,7 @@ export class DaysOfTheWeek extends React.Component{
             return <th key={day.toString()} style={headerStyles}>{day}</th>;
         })
         return (
-        <div className="col-sm-9" style={styles}>
+        <div style={styles}>
             <table style={tableStyles}>
                 <thead>
                     <tr>{days}</tr>

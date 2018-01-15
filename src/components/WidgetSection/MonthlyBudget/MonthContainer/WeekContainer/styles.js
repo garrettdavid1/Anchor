@@ -1,3 +1,4 @@
 export const tableStyles = {
-    marginBottom: '10px'
+    marginBottom: '10px',
+    width: '100%'
 }

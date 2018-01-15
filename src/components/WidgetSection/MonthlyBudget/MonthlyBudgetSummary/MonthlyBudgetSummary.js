@@ -5,8 +5,8 @@ import {MonthlyBudgetSummaryContent} from './MonthlyBudgetSummaryContent/Monthly
 export class MonthlyBudgetSummary extends React.Component{
     render(){
         return (
-        <div className="col-sm-3" style={styles}>
-            <MonthlyBudgetSummaryContent />
+        <div style={styles}>
+            <MonthlyBudgetSummaryContent transactions={this.props.transactions} />
         </div>
         );
     }

@@ -6,6 +6,37 @@ import { WidgetSection } from '../WidgetSection/WidgetSection';
 import {styles} from './styles';
 import {shadowStyles} from './styles'
 
+const sampleTransactions = [
+  {
+  transId: 0,
+  transName: 'Walmart',
+  transAmount: '15.90',
+  transType: 'debit',
+  transDate: new Date('1/5/18')
+},
+  {
+  transId: 1,
+  transName: 'Kroger',
+  transAmount: '1.34',
+  transType: 'debit',
+  transDate: new Date('1/8/18'
+)},
+  {
+  transId: 2,
+  transName: 'Paycheck',
+  transAmount: '200',
+  transType: 'credit',
+  transDate: new Date('1/15/18')
+},
+  {
+  transId: 3,
+  transName: 'Coyote\'s',
+  transAmount: '75.23',
+  transType: 'debit',
+  transDate: new Date('1/15/18')
+},
+]
+
 class App extends Component {
   constructor(props){
     super(props);
@@ -48,7 +79,7 @@ class App extends Component {
         <NavSection />
         <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement}/>
         <div style={shadowStyles}></div>
-        <WidgetSection widgets={widgets} date={this.state.date}/>
+        <WidgetSection widgets={widgets} date={this.state.date} transactions={sampleTransactions}/>
       </div>
     );
   }

@@ -11,17 +11,17 @@ export class WidgetSection extends React.Component{
                 case 'monthlyBudget': 
                     return (
                         <div key={widget} className="widget" style={styles}> 
-                            <MonthlyBudget date={this.props.date} />
+                            <MonthlyBudget date={this.props.date} transactions={this.props.transactions} />
                         </div>
                     );
                 case 'transactionLogs':
                     return (
                         <div key={widget} className="widget" style={styles}>
-                            <TransactionLogs date={this.props.date} />
+                            <TransactionLogs date={this.props.date} transactions={this.props.transactions} />
                         </div>
                     );
                 default:
-                    return;
+                    return <div></div>;
             }
         });
 

@@ -17,10 +17,10 @@ export class DateSection extends React.Component{
         return (
             <div style={styles}>
                 <div style={dateStyles}>
-                    <div className="glyphicon glyphicon-minus-sign" style={dateManipulatorStyles} onClick={this.props.decrement}></div>&nbsp;
+                    <div className="glyphicon glyphicon-minus-sign clickable" style={dateManipulatorStyles} onClick={this.props.decrement}></div>&nbsp;
                     {monthNames[this.props.date.getMonth()]}&nbsp;
                     {this.props.date.getFullYear()}&nbsp;
-                    <div className="glyphicon glyphicon-plus-sign" style={dateManipulatorStyles} onClick={this.props.increment}></div>
+                    <div className="glyphicon glyphicon-plus-sign clickable" style={dateManipulatorStyles} onClick={this.props.increment}></div>
                 </div>
             </div>
         );

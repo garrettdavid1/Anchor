@@ -23,7 +23,7 @@ const sampleTransactions = [
 )},
   {
   transId: 2,
-  transName: 'Paycheck',
+  transName: 'Paycheckblahblahblah',
   transAmount: '200',
   transType: 'credit',
   transDate: new Date('1/15/18')

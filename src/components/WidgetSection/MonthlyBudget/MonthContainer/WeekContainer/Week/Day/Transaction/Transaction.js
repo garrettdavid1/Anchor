@@ -1,6 +1,7 @@
 import React from 'react';
 import {styles} from './styles';
 import {fieldStyles} from './styles';
+import {Tooltip} from '../../../../../../../Tooltip/Tooltip'
 
 export class Transaction extends React.Component{
 
@@ -10,7 +11,9 @@ export class Transaction extends React.Component{
 
         return (
             <tr className="transaction" style={styles}>
-                <td className="transactionName" style={fieldStyles}>{name}</td>
+                <td className="transactionName" style={fieldStyles}>
+                    <Tooltip text={name} />
+                </td>
                 <td className="transactionAmount" style={fieldStyles}>{amount}</td>
             </tr>
         );

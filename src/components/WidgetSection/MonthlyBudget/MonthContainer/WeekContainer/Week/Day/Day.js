@@ -11,25 +11,41 @@ export class Day extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            balance: this.props.endingBal
+            balance: this.props.endingBal,
+            dayNum: this.props.dayNum,
+            placeholderCount: this.props.placeholderCount,
+            transactions: this.props.transactions,
+            id: this.props.id,
+            endingBal: this.props.endingBal
         }
     }
 
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            balance: nextProps.balance,
+            dayNum: nextProps.dayNum,
+            placeholderCount: nextProps.placeholderCount,
+            transactions: nextProps.transactions,
+            id: nextProps.id,
+            endingBal: nextProps.endingBal
+        })
+    }
+
     render(){
-        let transactions = this.props.transactions.map(transaction => {
+        let transactions = this.state.transactions.map(transaction => {
             return <Transaction key={transaction.transId} data={transaction}/>;
         });
 
         let placeholders = [];
         let trans;
-        for(var x = 0; x < this.props.placeholderCount; x++){
+        for(var x = 0; x < this.state.placeholderCount; x++){
             trans = <TransactionPlaceholder key={'placeholder-' + (x + 1)}/>;
             placeholders.push(trans);
         }
 
         return (
-            <td style={styles} id={this.props.id}>
-                <div style={dayNumStyles}>{this.props.dayNum}</div>
+            <td style={styles} id={this.state.id}>
+                <div style={dayNumStyles}>{this.state.dayNum}</div>
                 <table className="transactionContainer" style={transactionContainerStyles}>
                     <tbody>
                         {transactions}
@@ -37,7 +53,7 @@ export class Day extends React.Component{
                         <DayButton />
                     </tbody>
                 </table>
-                <div style={amountStyles} ><div className="endingBalance">{this.props.endingBal.toFixed(2)}</div></div>
+                <div style={amountStyles} ><div className="endingBalance">{this.state.endingBal.toFixed(2)}</div></div>
             </td>
         );
     }

@@ -7,14 +7,16 @@ export class WeekContainer extends React.Component{
         super(props);
         this.state = {
             transactions: this.props.transactions,
-            date: this.props.date
+            date: this.props.date,
+            startingBal: this.props.startingBal
         }
     }
 
     componentWillReceiveProps(nextProps){
         this.setState({
             transactions: nextProps.transactions,
-            date: nextProps.date
+            date: nextProps.date,
+            startingBal: nextProps.startingBal
         })
     }
 
@@ -49,7 +51,7 @@ export class WeekContainer extends React.Component{
                         }
                     }
                 }
-                week = <Week numOfVoidDays={numOfVoidDays} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions} startingBal={this.props.startingBal} />;
+                week = <Week numOfVoidDays={numOfVoidDays} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions} startingBal={this.state.startingBal} />;
                 numOfDays -= numOfDaysToAdd
                 numOfVoidDays = 0;
                 dayNum += numOfDaysToAdd;
@@ -68,7 +70,7 @@ export class WeekContainer extends React.Component{
                         }
                     }
                 }
-                week = <Week numOfVoidDays={0} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions}/>;
+                week = <Week numOfVoidDays={0} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions} startingBal={this.state.startingBal} />;
                 numOfDays -= numOfDaysToAdd;
                 dayNum += 7;
                 weeklyTransactions = [];

@@ -1,8 +1,12 @@
 import React from 'react';
 import {styles} from './styles';
 import {iconStyles} from './styles';
+import {lib} from '../../../../../../../../helpers/lib'
 
 export class DayButton extends React.Component{
+    componentDidMount(){
+        lib.hideTransactionsForSmallScreens();
+    }
 
     render(){
         return (

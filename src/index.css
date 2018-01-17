@@ -9,7 +9,7 @@ body {
   cursor: pointer;
 }
 
-.newTransButton:hover{
+.dayButton:hover{
   background-color: #628CCC;
   opacity: 1 !important;
 }

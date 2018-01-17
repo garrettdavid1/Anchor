@@ -5,5 +5,6 @@ export const styles = {
     border: '2px solid black',
     height: '50px',
     width: 'calc(100% / 7)',
+    maxWidth: 'calc(100% / 7)',
     backgroundColor: siteStyles.mainBackgroundColor
 }

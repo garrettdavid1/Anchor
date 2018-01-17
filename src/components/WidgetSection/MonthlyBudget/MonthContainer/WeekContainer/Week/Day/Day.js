@@ -4,9 +4,16 @@ import {dayNumStyles} from './styles';
 import {transactionContainerStyles} from './styles';
 import {amountStyles} from './styles';
 import {Transaction} from './Transaction/Transaction'
-import {TransactionButton} from './TransactionButton/TransactionButton';
+import {DayButton} from './DayButton/DayButton';
+import {TransactionPlaceholder} from './TransactionPlaceholder/TransactionPlaceholder';
 
 export class Day extends React.Component{
+    constructor(props){
+        super(props);
+        this.state={
+            balance: this.props.endingBal
+        }
+    }
 
     render(){
         let transactions = this.props.transactions.map(transaction => {
@@ -16,7 +23,7 @@ export class Day extends React.Component{
         let placeholders = [];
         let trans;
         for(var x = 0; x < this.props.placeholderCount; x++){
-            trans = <Transaction key={'placeholder-' + (x + 1)}/>;
+            trans = <TransactionPlaceholder key={'placeholder-' + (x + 1)}/>;
             placeholders.push(trans);
         }
 
@@ -27,10 +34,10 @@ export class Day extends React.Component{
                     <tbody>
                         {transactions}
                         {placeholders}
-                        <TransactionButton />
+                        <DayButton />
                     </tbody>
                 </table>
-                <div style={amountStyles}></div>
+                <div style={amountStyles} ><div className="endingBalance">{this.props.endingBal.toFixed(2)}</div></div>
             </td>
         );
     }

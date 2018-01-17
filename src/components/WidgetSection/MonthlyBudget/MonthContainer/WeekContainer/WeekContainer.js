@@ -3,11 +3,25 @@ import {tableStyles} from './styles';
 import {Week} from './Week/Week';
 
 export class WeekContainer extends React.Component{
+    constructor(props){
+        super(props);
+        this.state = {
+            transactions: this.props.transactions,
+            date: this.props.date
+        }
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            transactions: nextProps.transactions,
+            date: nextProps.date
+        })
+    }
 
     render(){
-        let transactions = this.props.transactions;
-        let currentTransactionDate = transactions.length > 0 ? transactions[0].transDate.getDate() : null;
-        const date = this.props.date;
+        let transactions = this.state.transactions;
+        let currentTransactionDate = transactions !== undefined ? transactions.length > 0 ? transactions[0].transDate.getDate() : null : null;
+        const date = this.state.date;
         let numOfVoidDays = new Date(date.getFullYear(), date.getMonth(), 1).getDay();
         let numOfDays = new Date(date.getFullYear(), date.getMonth() + 1, 0).getDate() + numOfVoidDays;
         const numOfWeeks = parseInt((numOfDays / 7) + 1, 10);
@@ -19,35 +33,39 @@ export class WeekContainer extends React.Component{
         for(var i = 0; i < numOfWeeks; i++){
             weekKeys.push(i + 1);
         }
-        const weeks = weekKeys.map(weekKey => {
+        let weeks = weekKeys.map(weekKey => {
             if(numOfVoidDays > 0){
                 numOfDays -= numOfVoidDays;
                 numOfDaysToAdd = 7 - numOfVoidDays;
-                for(var j = 0; j < transactions.length; j++){
-                    if(currentTransactionDate >= dayNum && currentTransactionDate <= numOfDaysToAdd){
-                        weeklyTransactions.push(transactions.shift());
-                        if(transactions.length > 0){
-                            currentTransactionDate = transactions[0].transDate.getDate();
+                if(transactions !== undefined){
+                    for(var j = 0; j < transactions.length; j++){
+                        if(currentTransactionDate >= dayNum && currentTransactionDate <= numOfDaysToAdd){
+                            weeklyTransactions.push(transactions.shift());
+                            if(transactions.length > 0){
+                                currentTransactionDate = transactions[0].transDate.getDate();
+                            }
+                        } else{
+                            break;
                         }
-                    } else{
-                        break;
                     }
                 }
-                week = <Week numOfVoidDays={numOfVoidDays} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions} />;
+                week = <Week numOfVoidDays={numOfVoidDays} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions} startingBal={this.props.startingBal} />;
                 numOfDays -= numOfDaysToAdd
                 numOfVoidDays = 0;
                 dayNum += numOfDaysToAdd;
                 weeklyTransactions = [];
             }else{
                 numOfDaysToAdd = numOfDays > 7 ? 7 : numOfDays;
-                while(transactions.length > 0){
-                    if(currentTransactionDate >= dayNum && currentTransactionDate <= (numOfDaysToAdd + dayNum)){
-                        weeklyTransactions.push(transactions.shift());
-                        if(transactions.length > 0){
-                            currentTransactionDate = transactions[0].transDate.getDate();
+                if(transactions !== undefined){
+                    while(transactions.length > 0){
+                        if(currentTransactionDate >= dayNum && currentTransactionDate < (numOfDaysToAdd + dayNum)){
+                            weeklyTransactions.push(transactions.shift());
+                            if(transactions.length > 0){
+                                currentTransactionDate = transactions[0].transDate.getDate();
+                            }
+                        } else{
+                            break;
                         }
-                    } else{
-                        break;
                     }
                 }
                 week = <Week numOfVoidDays={0} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions}/>;

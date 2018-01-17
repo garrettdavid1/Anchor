@@ -11,7 +11,7 @@ export class WidgetSection extends React.Component{
                 case 'monthlyBudget': 
                     return (
                         <div key={widget} className="widget" style={styles}> 
-                            <MonthlyBudget date={this.props.date} transactions={this.props.transactions} />
+                            <MonthlyBudget date={this.props.date} transactions={this.props.transactions} startingBal={this.props.startingBal} />
                         </div>
                     );
                 case 'transactionLogs':

@@ -8,7 +8,7 @@ import {lib} from './helpers/lib'
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
 
-window.addEventListener('resize', function(){
+window.addEventListener('resize', function () {
     lib.hideTransactionsForSmallScreens();
 });
 

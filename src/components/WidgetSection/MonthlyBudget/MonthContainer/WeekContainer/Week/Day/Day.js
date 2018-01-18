@@ -20,6 +20,17 @@ export class Day extends React.Component{
         }
     }
 
+    componentWillMount(){
+        this.setState({
+            balance: this.props.balance,
+            dayNum: this.props.dayNum,
+            placeholderCount: this.props.placeholderCount,
+            transactions: this.props.transactions,
+            id: this.props.id,
+            endingBal: this.props.endingBal
+        })
+    }
+
     componentWillReceiveProps(nextProps){
         this.setState({
             balance: nextProps.balance,

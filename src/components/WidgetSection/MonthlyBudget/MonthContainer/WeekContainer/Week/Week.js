@@ -24,8 +24,8 @@ export class Week extends React.Component{
     }
 
     getEndingBal(transactions, startingBal){
-        if(transactions.length > 0){
-            return transactions[transactions.length - 1].endingBal;
+        if(transactions.length <= 0){
+            return startingBal;
         } else{
             let totalExpenses = 0;
             let expense;
@@ -33,7 +33,7 @@ export class Week extends React.Component{
                 expense = trans.transType === 'debit' ? parseFloat(trans.transAmount * -1) : parseFloat(trans.transAmount);
                 totalExpenses += expense;
         });
-        let endingBal = startingBal - totalExpenses
+        let endingBal = startingBal + totalExpenses
         this.updateBalance(endingBal);
         return endingBal;
         }

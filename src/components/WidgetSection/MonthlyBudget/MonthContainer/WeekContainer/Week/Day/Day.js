@@ -11,40 +11,33 @@ export class Day extends React.Component{
     constructor(props){
         super(props);
         this.state={
-            balance: this.props.endingBal,
+            balance: parseFloat(this.props.balance),
             dayNum: this.props.dayNum,
             placeholderCount: this.props.placeholderCount,
             transactions: this.props.transactions,
             id: this.props.id,
-            endingBal: this.props.endingBal
+            endingBal: parseFloat(this.props.endingBal),
+            date: this.props.date
         }
-    }
-
-    componentWillMount(){
-        this.setState({
-            balance: this.props.balance,
-            dayNum: this.props.dayNum,
-            placeholderCount: this.props.placeholderCount,
-            transactions: this.props.transactions,
-            id: this.props.id,
-            endingBal: this.props.endingBal
-        })
     }
 
     componentWillReceiveProps(nextProps){
         this.setState({
-            balance: nextProps.balance,
+            balance: parseFloat(nextProps.balance),
             dayNum: nextProps.dayNum,
             placeholderCount: nextProps.placeholderCount,
             transactions: nextProps.transactions,
             id: nextProps.id,
-            endingBal: nextProps.endingBal
+            endingBal: parseFloat(nextProps.endingBal),
+            date: nextProps.date
         })
     }
 
     render(){
         let transactions = this.state.transactions.map(transaction => {
-            return <Transaction key={transaction.transId} data={transaction}/>;
+            let count = 1;
+            return <Transaction key={'transaction-' + count} data={transaction} transId={transaction.id}/>;
+            count++;
         });
 
         let placeholders = [];
@@ -61,7 +54,7 @@ export class Day extends React.Component{
                     <tbody>
                         {transactions}
                         {placeholders}
-                        <DayButton />
+                        <DayButton addOrEditTransaction={this.props.addOrEditTransaction} value={this.state.dayNum} date={this.state.date}/>
                     </tbody>
                 </table>
                 <div style={amountStyles} ><div className="endingBalance">{this.state.endingBal.toFixed(2)}</div></div>

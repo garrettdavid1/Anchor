@@ -21,8 +21,7 @@ export class WeekContainer extends React.Component{
             let totalExpenses = 0;
             let expense;
             transactions.forEach(function (trans) {
-                expense = trans.transType === 'debit' ? parseFloat(trans.transAmount * -1) : parseFloat(trans.transAmount);
-                totalExpenses += expense;
+                totalExpenses += parseFloat(trans.transAmount);
         });
         let endingBal = startingBal + totalExpenses
         return endingBal;
@@ -60,7 +59,16 @@ export class WeekContainer extends React.Component{
                         }
                     }
                 }
-                week = <Week numOfVoidDays={numOfVoidDays} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions} startingBal={balance} />;
+                week = <Week 
+                    numOfVoidDays={numOfVoidDays} 
+                    daysToAdd={numOfDaysToAdd} 
+                    key={'week-' + weekKey} 
+                    dayStartNum={dayNum} 
+                    transactions={weeklyTransactions} 
+                    startingBal={balance} 
+                    addOrEditTransaction={this.props.addOrEditTransaction}
+                    date={this.state.date}
+                    />;
                 balance = this.getEndingBal(weeklyTransactions, balance);
                 numOfDays -= numOfDaysToAdd
                 numOfVoidDays = 0;
@@ -80,7 +88,16 @@ export class WeekContainer extends React.Component{
                         }
                     }
                 }
-                week = <Week numOfVoidDays={0} daysToAdd={numOfDaysToAdd} key={'week-' + weekKey} dayStartNum={dayNum} transactions={weeklyTransactions} startingBal={balance} />;
+                week = <Week 
+                    numOfVoidDays={0} 
+                    daysToAdd={numOfDaysToAdd} 
+                    key={'week-' + weekKey} 
+                    dayStartNum={dayNum} 
+                    transactions={weeklyTransactions} 
+                    startingBal={balance} 
+                    addOrEditTransaction={this.props.addOrEditTransaction}
+                    date={this.state.date} 
+                    />;
                 balance = this.getEndingBal(weeklyTransactions, balance);
                 numOfDays -= numOfDaysToAdd;
                 dayNum += 7;

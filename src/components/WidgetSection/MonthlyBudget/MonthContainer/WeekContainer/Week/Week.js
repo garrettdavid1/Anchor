@@ -10,7 +10,9 @@ export class Week extends React.Component{
             numOfVoidDays: this.props.numOfVoidDays,
             daysToAdd: this.props.daysToAdd,
             dayStartNum: this.props.dayStartNum,
-            transactions: this.props.transactions
+            transactions: this.props.transactions,
+            date: this.props.date,
+            // days: this.getDays(this.props.dayStartNum, this.props.transactions, this.props.numOfVoidDays, this.props.daysToAdd, this.props.balance)
         }
         this.getEndingBal = this.getEndingBal.bind(this);
         this.getDays = this.getDays.bind(this);
@@ -30,8 +32,7 @@ export class Week extends React.Component{
             let totalExpenses = 0;
             let expense;
             transactions.forEach(function (trans) {
-                expense = trans.transType === 'debit' ? parseFloat(trans.transAmount * -1) : parseFloat(trans.transAmount);
-                totalExpenses += expense;
+                totalExpenses += parseFloat(trans.transAmount);
         });
         let endingBal = startingBal + totalExpenses
         this.updateBalance(endingBal);
@@ -87,7 +88,16 @@ export class Week extends React.Component{
             }
             endingBal = this.getEndingBal(dailyTransactions, balance);
             numOfPlaceholders = highestDailyTransCount - dailyTransactions.length;
-            day = <Day id={'day-' + dayKey} key={'day-' + dayKey} dayNum={num} transactions={dailyTransactions} placeholderCount={numOfPlaceholders} endingBal={endingBal} />;
+            day = <Day 
+                id={'day-' + dayKey} 
+                key={'day-' + dayKey} 
+                dayNum={num} 
+                transactions={dailyTransactions} 
+                placeholderCount={numOfPlaceholders} 
+                endingBal={endingBal} 
+                addOrEditTransaction={this.props.addOrEditTransaction}
+                date={this.state.date}
+                />;
             balance = endingBal;
             num++;
             dailyTransactions = [];
@@ -109,7 +119,7 @@ export class Week extends React.Component{
 
     componentWillMount(){
         this.setState({
-            days : this.getDays(this.state.dayStartNum, this.state.transactions, this.state.numOfVoidDays, this.state.daysToAdd, this.state.balance)
+            days : this.getDays(this.state.dayStartNum, this.state.transactions, this.state.numOfVoidDays, this.state.daysToAdd, parseFloat(this.state.balance))
         })
     }
 
@@ -120,7 +130,8 @@ export class Week extends React.Component{
             daysToAdd: nextProps.daysToAdd,
             dayStartNum: nextProps.dayStartNum,
             transactions: nextProps.transactions,
-            days : this.getDays(nextProps.dayStartNum, nextProps.transactions, nextProps.numOfVoidDays, nextProps.daysToAdd, nextProps.startingBal)
+            days : this.getDays(nextProps.dayStartNum, nextProps.transactions, nextProps.numOfVoidDays, nextProps.daysToAdd, parseFloat(nextProps.startingBal)),
+            date: nextProps.date
         });
     }
 

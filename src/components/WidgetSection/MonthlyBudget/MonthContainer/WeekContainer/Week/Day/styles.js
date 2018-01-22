@@ -24,5 +24,6 @@ export const amountStyles = {
     minHeight: '20px',
     borderTop: '1px solid black',
     backgroundColor: siteStyles.green,
-    fontWeight: '900'
+    fontWeight: '900',
+    width: '100%'
 }

@@ -8,7 +8,7 @@ export class MonthContainer extends React.Component{
         return (
             <div id="monthContainer">
                 <DaysOfTheWeek />
-                <WeekContainer date={this.props.date} transactions={this.props.transactions} startingBal={this.props.startingBal} />
+                <WeekContainer date={this.props.date} transactions={this.props.transactions} startingBal={this.props.startingBal} addOrEditTransaction={this.props.addOrEditTransaction}/>
             </div>
         );
     }

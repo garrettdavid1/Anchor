@@ -6,7 +6,7 @@ import {Tooltip} from '../../../../../../../Tooltip/Tooltip'
 export class Transaction extends React.Component{
 
     render(){
-        let amount = (this.props.data !== undefined) ? this.props.data.transType === 'debit' ? this.props.data.transAmount * -1 : this.props.data.transAmount : '';
+        let amount = (this.props.data !== undefined) ? this.props.data.transAmount : '';
         let name = (this.props.data !== undefined) ? this.props.data.transName : '';
 
         return (

@@ -16,5 +16,19 @@ export const lib = {
             $('.newTransButton').show();
             $('.viewDayButton').hide();
         }
+    },
+
+    hideLastMonthButtonIfNotExists: function(isFirstAvailableMonth){
+        if(isFirstAvailableMonth){
+            $('#lastMonth').hide();
+        }else{
+            $('#lastMonth').show();
+        }
+    },
+
+    setFocus(selector){
+        setTimeout(function(){
+            $(selector).focus();
+        }, 20)
     }
 }

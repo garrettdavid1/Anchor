@@ -9,6 +9,11 @@ body {
   cursor: pointer;
 }
 
+.closeModal{
+  -webkit-text-stroke: 2px #020C4C; 
+  text-stroke: 2px #020C4C;
+}
+
 .dayButton:hover{
   background-color: #628CCC;
   opacity: 1 !important;
@@ -24,6 +29,10 @@ body {
 
 .transactionAmount{
   border-left: 1px solid #D3D4D9;
+}
+
+#transactionModalContents:focus{
+  outline: none;
 }
 
 .widget{

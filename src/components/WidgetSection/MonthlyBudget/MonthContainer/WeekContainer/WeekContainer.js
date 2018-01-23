@@ -14,6 +14,32 @@ export class WeekContainer extends React.Component{
         this.getEndingBal = this.getEndingBal.bind(this);
     }
 
+    componentWillMount(){
+        this.setState({
+            weeks: this.getWeeks(this.props.transactions, this.props.startingBal)
+        })
+    }
+
+    componentWillReceiveProps(nextProps){
+        this.setState({
+            transactions: nextProps.transactions,
+            date: nextProps.date,
+            startingBal: nextProps.startingBal,
+            weeks: this.getWeeks(nextProps.transactions, nextProps.startingBal)
+        })
+    }
+
+    render(){
+        
+        return (
+            <table id="weekContainer" style={tableStyles}>
+                <tbody>
+                    {this.state.weeks}
+                </tbody>
+            </table>
+        );
+    }
+
     getEndingBal(transactions, startingBal){
         if(transactions.length <= 0){
             return startingBal;
@@ -66,7 +92,7 @@ export class WeekContainer extends React.Component{
                     dayStartNum={dayNum} 
                     transactions={weeklyTransactions} 
                     startingBal={balance} 
-                    addOrEditTransaction={this.props.addOrEditTransaction}
+                    openTransactionModal={this.props.openTransactionModal}
                     date={this.state.date}
                     />;
                 balance = this.getEndingBal(weeklyTransactions, balance);
@@ -96,7 +122,8 @@ export class WeekContainer extends React.Component{
                     transactions={weeklyTransactions} 
                     startingBal={balance} 
                     addOrEditTransaction={this.props.addOrEditTransaction}
-                    date={this.state.date} 
+                    date={this.state.date}
+                    openTransactionModal={this.props.openTransactionModal}
                     />;
                 balance = this.getEndingBal(weeklyTransactions, balance);
                 numOfDays -= numOfDaysToAdd;
@@ -107,31 +134,5 @@ export class WeekContainer extends React.Component{
         })
 
         return weeks;
-    }
-
-    componentWillMount(){
-        this.setState({
-            weeks: this.getWeeks(this.props.transactions, this.props.startingBal)
-        })
-    }
-
-    componentWillReceiveProps(nextProps){
-        this.setState({
-            transactions: nextProps.transactions,
-            date: nextProps.date,
-            startingBal: nextProps.startingBal,
-            weeks: this.getWeeks(nextProps.transactions, nextProps.startingBal)
-        })
-    }
-
-    render(){
-        
-        return (
-            <table id="weekContainer" style={tableStyles}>
-                <tbody>
-                    {this.state.weeks}
-                </tbody>
-            </table>
-        );
     }
 }

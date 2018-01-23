@@ -26,6 +26,10 @@ export class WidgetSection extends React.Component{
 
     componentWillReceiveProps(nextProps) {
         this.getData(nextProps.date.getMonth(), nextProps.date.getFullYear());
+        this.setState({
+            date: nextProps.date,
+            data: nextProps.data
+        })
     }
 
     render(){
@@ -35,7 +39,14 @@ export class WidgetSection extends React.Component{
                     case 'monthlyBudget': 
                         return (
                             <div key={widget} className="widget" style={styles}> 
-                                <MonthlyBudget date={this.props.date} transactions={this.state.data.transactions} startingBal={this.state.data.startingBal} monthWasNull={this.state.data.wasNull} setInitialBalance={this.setInitialBalance} saveTransaction={this.saveTransaction}/>
+                                <MonthlyBudget 
+                                    date={this.state.date} 
+                                    transactions={this.state.data.transactions} 
+                                    startingBal={this.state.data.startingBal} 
+                                    endingBal={this.state.data.endingBal}
+                                    monthWasNull={this.state.data.wasNull} 
+                                    setInitialBalance={this.setInitialBalance} 
+                                    saveTransaction={this.saveTransaction}/>
                             </div>
                         );
                     case 'transactionLogs':
@@ -84,6 +95,9 @@ export class WidgetSection extends React.Component{
 
     getData(monthNum, year) {
         var self = this;
+        this.setState({
+            dataLoaded: false
+        })
         $.ajax({
             url: config.apiEndpointDomain + '/getMonthData/' + monthNum + '/' + year,
             type: 'get',

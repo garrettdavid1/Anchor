@@ -13,10 +13,15 @@ export class TransactionModal extends React.Component{
         super(props);
         this.state = {
             userInput: undefined,
-            date: this.props.date
+            date: this.props.date,
+            name: this.props.name,
+            amount: this.props.amount,
+            dayNum: this.props.dayNum,
+            id: this.props.id
         }
         this.handleUserInput = this.handleUserInput.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
+        this.updateNameState = this.updateNameState.bind(this);
     }
 
     componentWillMount(){
@@ -29,21 +34,25 @@ export class TransactionModal extends React.Component{
     componentWillReceiveProps(nextProps){
         this.setState({
             dayNum: nextProps.dayNum,
-            date: nextProps.date
+            date: nextProps.date,
+            name: nextProps.name,
+            amount: nextProps.amount,
+            id: nextProps.id
         });
     }
     
     render(){
+        let action = (this.state.id !== undefined && this.state.id !== '') ? 'Edit' : 'New';
         return (
             <div id='transactionModal'  >
                 <div id="transactionModalContents" style={styles} onKeyDown={this.onKeyDown} tabIndex="0">
                     <div style={headerStyles}>{this.state.dayNum}</div>
                     <div className="closeModal" style={cancelStyles} onClick={this.props.closeTransactionModal}>X</div>
-                    <h4>New Transaction</h4>
+                    <h4>{action} Transaction</h4>
                     <label style={labelStyles}>Name</label>
-                    <input id="transNameInput" style={inputStyles} type="text" />
+                    <input id="transNameInput" style={inputStyles} type="text" defaultValue={this.state.name} onChange={this.updateNameState} />
                     <label style={labelStyles}>Amount</label>
-                    <input id="transAmountInput" style={inputStyles} type="number" step=".01" />
+                    <input id="transAmountInput" style={inputStyles} type="number" step=".01" defaultValue={this.state.amount} onChange={this.updateAmountState} />
                     <button type="button" style={submitStyles} onClick={this.handleUserInput}>Submit</button>
                 </div>
                 <ModalBackdrop />
@@ -56,19 +65,20 @@ export class TransactionModal extends React.Component{
         let amount = parseFloat($('#transAmountInput')[0].value)
         let type = amount >= 0 ? 'deposit' : 'expense';
         let date = new Date(this.state.date);
+        let id = this.state.id;
         date.setDate(parseInt(this.state.dayNum, 10));
         let transaction = {
             transName: name,
             transAmount: amount,
             transType: type,
-            transDate: date
+            transDate: date,
+            _id: id
         }
         if(!isNaN(amount) && typeof name === 'string'){
             this.setState({
                 userInput: transaction
             });
             this.props.saveTransaction(transaction);
-            // this.props.closeTransactionModal();
         }
     }
 
@@ -79,5 +89,16 @@ export class TransactionModal extends React.Component{
         } else if(e.key === 'Escape'){
             this.props.closeTransactionModal();
         }
+    }
+
+    updateNameState(e){
+        // this.setState({
+        //     name: e.target.attributes.value.nodeValue
+        // });
+    }
+    updateAmountState(e){
+        // this.setState({
+        //     amount: parseFloat(e.target.attributes.value.nodeValue)
+        // });
     }
 }

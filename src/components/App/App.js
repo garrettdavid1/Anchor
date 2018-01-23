@@ -32,9 +32,7 @@ class App extends Component {
 
   decrement() {
     this.addMonth(-1);
-  }
-
-  
+  } 
 
   render() {
     const widgets = ['monthlyBudget', 'transactionLogs'];

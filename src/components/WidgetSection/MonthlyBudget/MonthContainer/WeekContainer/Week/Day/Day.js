@@ -17,7 +17,8 @@ export class Day extends React.Component{
             transactions: this.props.transactions,
             id: this.props.id,
             endingBal: parseFloat(this.props.endingBal),
-            date: this.props.date
+            date: this.props.date,
+            openTransactionModal: this.props.openTransactionModal
         }
     }
 
@@ -34,10 +35,16 @@ export class Day extends React.Component{
     }
 
     render(){
+        var self = this;
         let transactions = this.state.transactions.map(transaction => {
-            let count = 1;
-            return <Transaction key={'transaction-' + count} data={transaction} transId={transaction.id}/>;
-            count++;
+            return <Transaction 
+                key={'transaction-' + transaction._id} 
+                data={transaction} 
+                transId={transaction._id} 
+                openTransactionModal={self.props.openTransactionModal}
+                date={self.state.date}
+                dayNum={this.state.dayNum}
+                />;
         });
 
         let placeholders = [];
@@ -54,7 +61,7 @@ export class Day extends React.Component{
                     <tbody>
                         {transactions}
                         {placeholders}
-                        <DayButton addOrEditTransaction={this.props.addOrEditTransaction} value={this.state.dayNum} date={this.state.date}/>
+                        <DayButton openTransactionModal={this.props.openTransactionModal} dayNum={this.state.dayNum} date={this.state.date}/>
                     </tbody>
                 </table>
                 <div style={amountStyles} ><div className="endingBalance">{this.state.endingBal.toFixed(2)}</div></div>

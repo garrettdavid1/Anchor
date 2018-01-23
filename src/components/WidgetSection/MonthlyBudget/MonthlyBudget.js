@@ -12,7 +12,10 @@ export class MonthlyBudget extends React.Component{
         this.state = {
             startingModal: undefined,
             transactionModal: undefined,
-            date: this.props.date
+            date: this.props.date,
+            transactions: this.props.transactions,
+            startingBal: this.props.startingBal,
+            endingBal: this.props.endingBal
         }
         this.setInitialBalance = this.setInitialBalance.bind(this);
         this.openTransactionModal = this.openTransactionModal.bind(this);
@@ -30,16 +33,26 @@ export class MonthlyBudget extends React.Component{
     }
 
     componentWillReceiveProps(nextProps){
-        this.setState({
-            date: nextProps.date
-        })
+        if(nextProps !== undefined){
+            this.setState({
+                date: nextProps.date,
+                transactions: nextProps.transactions,
+                startingBal: nextProps.startingBal,
+                endingBal: nextProps.endingBal
+            })
+        }
     }
 
     render(){
         return (
         <div style={styles}>
-            <MonthContainer date={this.state.date} transactions={this.props.transactions} startingBal={this.props.startingBal} addOrEditTransaction={this.openTransactionModal} />
-            <MonthlyBudgetSummary transactions={this.props.transactions} startingBal={this.props.startingBal} />
+            <MonthContainer 
+                date={this.state.date} 
+                transactions={this.state.transactions} 
+                startingBal={this.state.startingBal}
+                endingBal={this.state.endingBal}
+                openTransactionModal={this.openTransactionModal} />
+            <MonthlyBudgetSummary transactions={this.state.transactions} startingBal={this.state.startingBal} />
             {this.state.startingModal}
             {this.state.transactionModal}
         </div>
@@ -50,14 +63,19 @@ export class MonthlyBudget extends React.Component{
         this.props.setInitialBalance(val);
     }
 
-    openTransactionModal(e, date){
+    openTransactionModal(e, date, id, name, amount, dayNum){
+        var thisDate = date === undefined ? e.target.attributes.date.nodeValue : date;
+        var thisDayNum = dayNum === undefined ? e.target.attributes.value.nodeValue : dayNum;
         this.setState({
             transactionModal: 
                 <TransactionModal 
-                    date={e.target.attributes.date.nodeValue}
-                    dayNum={e.target.attributes.value.nodeValue} 
+                    date={thisDate}
+                    dayNum={thisDayNum} 
                     closeTransactionModal={this.closeTransactionModal} 
                     saveTransaction={this.saveTransaction}
+                    id={id}
+                    name={name}
+                    amount={amount}
                 />
         })
         lib.setFocus('#transNameInput');

@@ -1,6 +1,7 @@
 import React from 'react';
 import {styles} from './styles';
 import {containerStyles} from './styles';
+import {loadingStatusStyles} from './styles';
 import {MonthlyBudget} from './MonthlyBudget/MonthlyBudget'
 import {TransactionLogs} from './TransactionLogs/TransactionLogs'
 import $ from './../../../node_modules/jquery/src/jquery'
@@ -13,7 +14,8 @@ export class WidgetSection extends React.Component{
         this.state = {
             date: this.props.date,
             data: undefined,
-            dataLoaded: undefined
+            dataLoaded: undefined,
+            loadingStatus: 'Waiting for data...'
         }
         this.getData = this.getData.bind(this);
         this.setInitialBalance = this.setInitialBalance.bind(this);
@@ -62,7 +64,7 @@ export class WidgetSection extends React.Component{
     
             return <div id="widgetContainer" style={containerStyles}>{widgets}</div> 
         } else{
-            return <div>Waiting for data...</div>;
+            return <div style={loadingStatusStyles}>{this.state.loadingStatus}</div>;
         }
     }
 
@@ -76,7 +78,8 @@ export class WidgetSection extends React.Component{
     setInitialBalance(val){
         var self = this;
         this.setState({
-            dataLoaded: false
+            dataLoaded: false,
+            loadingStatus: 'Waiting for data...'
         });
         $.ajax({
             url: config.apiEndpointDomain + '/initStartingBal/' + val,
@@ -89,14 +92,17 @@ export class WidgetSection extends React.Component{
             })
             lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
         }).fail(function (resp) {
-            console.log('Response Status: ' + JSON.parse(resp));
+            self.setState({
+                loadingStatus: 'No data found.'
+            })
         });
     }
 
     getData(monthNum, year) {
         var self = this;
         this.setState({
-            dataLoaded: false
+            dataLoaded: false,
+            loadingStatus: 'Waiting for data...'
         })
         $.ajax({
             url: config.apiEndpointDomain + '/getMonthData/' + monthNum + '/' + year,
@@ -114,7 +120,9 @@ export class WidgetSection extends React.Component{
             });
             lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
         }).fail(function (resp) {
-            console.log('Response Status: ' + JSON.parse(resp));
+            self.setState({
+                loadingStatus: 'No data found.'
+            })
         });
     }
 
@@ -137,7 +145,9 @@ export class WidgetSection extends React.Component{
             });
             lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
         }).fail(function (resp) {
-            console.log('Response Status: ' + JSON.parse(resp));
+            self.setState({
+                loadingStatus: 'No data found.'
+            })
         });
     }
 

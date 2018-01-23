@@ -15,3 +15,9 @@ export const containerStyles = {
     height: 'calc(82.5% - 5px)',
     overflowY: 'scroll'
 }
+
+export const loadingStatusStyles = {
+    fontWeight: '900',
+    fontSize: '16px',
+    marginTop: '20px'
+}

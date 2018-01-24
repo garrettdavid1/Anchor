@@ -76,6 +76,7 @@ export class MonthlyBudget extends React.Component{
                     id={id}
                     name={name}
                     amount={amount}
+                    deleteTransaction={this.props.deleteTransaction}
                 />
         })
         lib.setFocus('#transNameInput');

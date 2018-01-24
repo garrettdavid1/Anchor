@@ -5,18 +5,32 @@ export const styles = {
     position: 'fixed',
     backgroundColor: 'white',
     width: '200px',
-    height: '210px',
+    height: 'auto',
     top: (window.innerHeight - 210)/ 2,
     left: (window.innerWidth - 200) / 2,
     zIndex: 1000,
     border: '1px solid black',
-    borderRadius: '5px'
+    borderRadius: '5px',
+    paddingBottom: '10px'
 }
 
 export const submitStyles = {
     marginTop: '10px',
+    marginRight: '10px',
     borderRadius: '5px',
-    width: '100px'
+    width: '40%'
+}
+
+export const fullWidthBtnStyles = {
+    marginTop: '10px',
+    borderRadius: '5px',
+    width: 'calc(80% + 10px)'
+}
+
+export const deleteStyles = {
+    marginTop: '10px',
+    borderRadius: '5px',
+    width: '40%'
 }
 
 export const headerStyles = {

@@ -1,6 +1,8 @@
 import React from 'react';
 import {styles} from './styles';
 import {submitStyles} from './styles';
+import {deleteStyles} from './styles';
+import {fullWidthBtnStyles} from './styles';
 import {headerStyles} from './styles';
 import {labelStyles} from './styles';
 import {inputStyles} from './styles';
@@ -22,6 +24,7 @@ export class TransactionModal extends React.Component{
         this.handleUserInput = this.handleUserInput.bind(this);
         this.onKeyDown = this.onKeyDown.bind(this);
         this.updateNameState = this.updateNameState.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentWillMount(){
@@ -43,6 +46,8 @@ export class TransactionModal extends React.Component{
     
     render(){
         let action = (this.state.id !== undefined && this.state.id !== '') ? 'Edit' : 'New';
+        let deleteBtn = action === 'Edit' ? <button type="button" className="btn btn-danger" style={deleteStyles} onClick={this.handleDelete}>Delete</button> : '';
+        let submitBtnStyles = action === 'Edit' ? submitStyles : fullWidthBtnStyles;
         return (
             <div id='transactionModal'  >
                 <div id="transactionModalContents" style={styles} onKeyDown={this.onKeyDown} tabIndex="0">
@@ -53,7 +58,8 @@ export class TransactionModal extends React.Component{
                     <input id="transNameInput" style={inputStyles} type="text" defaultValue={this.state.name} onChange={this.updateNameState} />
                     <label style={labelStyles}>Amount</label>
                     <input id="transAmountInput" style={inputStyles} type="number" step=".01" defaultValue={this.state.amount} onChange={this.updateAmountState} />
-                    <button type="button" style={submitStyles} onClick={this.handleUserInput}>Submit</button>
+                    <button type="button" className="btn btn-default" style={submitBtnStyles} onClick={this.handleUserInput}>Submit</button>
+                    {deleteBtn}
                 </div>
                 <ModalBackdrop />
             </div>
@@ -79,6 +85,13 @@ export class TransactionModal extends React.Component{
                 userInput: transaction
             });
             this.props.saveTransaction(transaction);
+        }
+    }
+
+    handleDelete(){
+        var confirm = window.confirm('Are you sure you want to delete this transaction?');
+        if(confirm){
+            this.props.deleteTransaction(this.state.date, this.state.id);
         }
     }
 

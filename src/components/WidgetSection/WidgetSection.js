@@ -20,6 +20,7 @@ export class WidgetSection extends React.Component{
         this.getData = this.getData.bind(this);
         this.setInitialBalance = this.setInitialBalance.bind(this);
         this.saveTransaction = this.saveTransaction.bind(this);
+        this.deleteTransaction = this.deleteTransaction.bind(this);
     }
 
     componentWillMount() {
@@ -48,7 +49,8 @@ export class WidgetSection extends React.Component{
                                     endingBal={this.state.data.endingBal}
                                     monthWasNull={this.state.data.wasNull} 
                                     setInitialBalance={this.setInitialBalance} 
-                                    saveTransaction={this.saveTransaction}/>
+                                    saveTransaction={this.saveTransaction}
+                                    deleteTransaction={this.deleteTransaction}/>
                             </div>
                         );
                     case 'transactionLogs':
@@ -132,6 +134,34 @@ export class WidgetSection extends React.Component{
             url: config.apiEndpointDomain + '/saveTransaction',
             type: 'post',
             data: { transaction: transaction},
+            dataType: 'json'
+        }).done(function (resp) {
+            resp.startingBal = parseFloat(resp.startingBal);
+            resp.transactions.forEach(function (trans) {
+                trans.transDate = new Date(trans.transDate);
+                trans.transAmount = parseFloat(trans.transAmount);
+            });
+            self.setState({
+                data: resp,
+                dataLoaded: true
+            });
+            lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
+        }).fail(function (resp) {
+            self.setState({
+                loadingStatus: 'No data found.'
+            })
+        });
+    }
+
+    deleteTransaction(date, transId){
+        var self = this;
+        this.setState({
+            dataLoaded: false,
+            loadingStatus: 'Waiting for data...'
+        })
+        $.ajax({
+            url: config.apiEndpointDomain + '/deleteTransaction/' + date + '/' + transId,
+            type: 'get',
             dataType: 'json'
         }).done(function (resp) {
             resp.startingBal = parseFloat(resp.startingBal);

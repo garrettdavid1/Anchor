@@ -84,7 +84,7 @@ export class WidgetSection extends React.Component{
             loadingStatus: 'Waiting for data...'
         });
         $.ajax({
-            url: config.apiEndpointDomain + '/initStartingBal/' + val,
+            url: config.apiEndpointDomain + '/initStartingBal/' + val + '/' + this.state.date,
             type: 'get',
             dataType: 'json'
         }).done(function (resp) {

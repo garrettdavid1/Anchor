@@ -94,6 +94,7 @@ export class WeekContainer extends React.Component{
                     startingBal={balance} 
                     openTransactionModal={this.props.openTransactionModal}
                     date={this.state.date}
+                    saveTransaction={this.props.saveTransaction}
                     />;
                 balance = this.getEndingBal(weeklyTransactions, balance);
                 numOfDays -= numOfDaysToAdd
@@ -124,6 +125,7 @@ export class WeekContainer extends React.Component{
                     addOrEditTransaction={this.props.addOrEditTransaction}
                     date={this.state.date}
                     openTransactionModal={this.props.openTransactionModal}
+                    saveTransaction={this.props.saveTransaction}
                     />;
                 balance = this.getEndingBal(weeklyTransactions, balance);
                 numOfDays -= numOfDaysToAdd;

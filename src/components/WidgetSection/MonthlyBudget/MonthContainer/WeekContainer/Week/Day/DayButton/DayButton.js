@@ -27,7 +27,7 @@ export class DayButton extends React.Component{
 
     render(){
         return (
-            <tr className="btn dayButton" style={styles}>
+            <tr className="dayButton" style={styles}>
                 <td className="glyphicon glyphicon-plus-sign newTransButton" style={iconStyles} onClick={this.openTransactionModal} value={this.state.dayNum} date={this.state.date}></td>
                 <td className="glyphicon glyphicon-zoom-in viewDayButton" style={iconStyles}></td>
                 {this.state.newTransModal}

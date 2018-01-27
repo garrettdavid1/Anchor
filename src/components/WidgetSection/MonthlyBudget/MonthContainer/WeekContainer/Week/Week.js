@@ -123,6 +123,7 @@ export class Week extends React.Component{
                 endingBal={endingBal} 
                 openTransactionModal={this.props.openTransactionModal}
                 date={this.state.date}
+                saveTransaction={this.props.saveTransaction}
                 />;
             balance = endingBal;
             num++;

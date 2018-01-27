@@ -51,7 +51,8 @@ export class MonthlyBudget extends React.Component{
                 transactions={this.state.transactions} 
                 startingBal={this.state.startingBal}
                 endingBal={this.state.endingBal}
-                openTransactionModal={this.openTransactionModal} />
+                openTransactionModal={this.openTransactionModal} 
+                saveTransaction={this.saveTransaction}/>
             <MonthlyBudgetSummary transactions={this.state.transactions} startingBal={this.state.startingBal} />
             {this.state.startingModal}
             {this.state.transactionModal}

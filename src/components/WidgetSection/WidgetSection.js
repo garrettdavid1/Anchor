@@ -24,7 +24,11 @@ export class WidgetSection extends React.Component{
     }
 
     componentWillMount() {
-        this.getData(this.props.date.getMonth(), this.props.date.getFullYear());
+        // this.getData(this.props.date.getMonth(), this.props.date.getFullYear());
+        this.setState({
+            data: this.props.initData,
+            dataLoaded: true
+        });
     }
 
     componentWillReceiveProps(nextProps) {
@@ -33,6 +37,10 @@ export class WidgetSection extends React.Component{
             date: nextProps.date,
             data: nextProps.data
         })
+    }
+
+    componentDidMount(){
+        lib.hideLastMonthButtonIfNotExists(this.props.initData.isFirstAvailableMonth);
     }
 
     render(){
@@ -83,21 +91,21 @@ export class WidgetSection extends React.Component{
             dataLoaded: false,
             loadingStatus: 'Waiting for data...'
         });
-        $.ajax({
-            url: config.apiEndpointDomain + '/initStartingBal/' + val + '/' + this.state.date,
-            type: 'get',
-            dataType: 'json'
-        }).done(function (resp) {
-            self.setState({
-                data: resp,
-                dataLoaded: true
-            })
-            lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
-        }).fail(function (resp) {
-            self.setState({
-                loadingStatus: 'No data found.'
-            })
-        });
+        lib.xhrGet(
+            config.apiEndpointDomain + '/initStartingBal/' + val + '/' + this.state.date, 
+            'json', 
+            function(resp){
+                self.setState({
+                    data: resp,
+                    dataLoaded: true
+                })
+                lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
+            }, function(resp){
+                self.setState({
+                    loadingStatus: 'No data found.'
+                })
+            }
+        );
     }
 
     getData(monthNum, year) {
@@ -106,51 +114,53 @@ export class WidgetSection extends React.Component{
             dataLoaded: false,
             loadingStatus: 'Waiting for data...'
         })
-        $.ajax({
-            url: config.apiEndpointDomain + '/getMonthData/' + monthNum + '/' + year,
-            type: 'get',
-            dataType: 'json'
-        }).done(function (resp) {
-            resp.startingBal = parseFloat(resp.startingBal);
-            resp.transactions.forEach(function (trans) {
-                trans.transDate = new Date(trans.transDate);
-                trans.transAmount = parseFloat(trans.transAmount);
-            });
-            self.setState({
-                data: resp,
-                dataLoaded: true
-            });
-            lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
-        }).fail(function (resp) {
-            self.setState({
-                loadingStatus: 'No data found.'
-            })
-        });
+        lib.xhrGet(
+            config.apiEndpointDomain + '/getMonthData/' + monthNum + '/' + year,
+            'json',
+            function (resp) {
+                resp.startingBal = parseFloat(resp.startingBal);
+                resp.transactions.forEach(function (trans) {
+                    trans.transDate = new Date(trans.transDate);
+                    trans.transAmount = parseFloat(trans.transAmount);
+                });
+                self.setState({
+                    data: resp,
+                    dataLoaded: true
+                });
+                lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
+            },
+            function (resp) {
+                self.setState({
+                    loadingStatus: 'No data found.'
+                })
+            }
+        );
     }
 
     saveTransaction(transaction){
         var self = this;
-        $.ajax({
-            url: config.apiEndpointDomain + '/saveTransaction',
-            type: 'post',
-            data: { transaction: transaction},
-            dataType: 'json'
-        }).done(function (resp) {
-            resp.startingBal = parseFloat(resp.startingBal);
-            resp.transactions.forEach(function (trans) {
-                trans.transDate = new Date(trans.transDate);
-                trans.transAmount = parseFloat(trans.transAmount);
-            });
-            self.setState({
-                data: resp,
-                dataLoaded: true
-            });
-            lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
-        }).fail(function (resp) {
-            self.setState({
-                loadingStatus: 'No data found.'
-            })
-        });
+        lib.xhrPost(
+            config.apiEndpointDomain + '/saveTransaction',
+            'json',
+            { transaction: transaction },
+            function (resp) {
+                resp.startingBal = parseFloat(resp.startingBal);
+                resp.transactions.forEach(function (trans) {
+                    trans.transDate = new Date(trans.transDate);
+                    trans.transAmount = parseFloat(trans.transAmount);
+                });
+                self.setState({
+                    data: resp,
+                    dataLoaded: true
+                });
+                lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
+            },
+            function (resp) {
+                self.setState({
+                    loadingStatus: 'No data found.'
+                })
+            }
+        );
     }
 
     deleteTransaction(date, transId){
@@ -159,26 +169,28 @@ export class WidgetSection extends React.Component{
             dataLoaded: false,
             loadingStatus: 'Waiting for data...'
         })
-        $.ajax({
-            url: config.apiEndpointDomain + '/deleteTransaction/' + date + '/' + transId,
-            type: 'get',
-            dataType: 'json'
-        }).done(function (resp) {
-            resp.startingBal = parseFloat(resp.startingBal);
-            resp.transactions.forEach(function (trans) {
-                trans.transDate = new Date(trans.transDate);
-                trans.transAmount = parseFloat(trans.transAmount);
-            });
-            self.setState({
-                data: resp,
-                dataLoaded: true
-            });
-            lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
-        }).fail(function (resp) {
-            self.setState({
-                loadingStatus: 'No data found.'
-            })
-        });
+
+        lib.xhrGet(
+            config.apiEndpointDomain + '/deleteTransaction/' + date + '/' + transId,
+            'json',
+            function (resp) {
+                resp.startingBal = parseFloat(resp.startingBal);
+                resp.transactions.forEach(function (trans) {
+                    trans.transDate = new Date(trans.transDate);
+                    trans.transAmount = parseFloat(trans.transAmount);
+                });
+                self.setState({
+                    data: resp,
+                    dataLoaded: true
+                });
+                lib.hideLastMonthButtonIfNotExists(resp.isFirstAvailableMonth);
+            },
+            function (resp) {
+                self.setState({
+                    loadingStatus: 'No data found.'
+                });
+            }
+        );
     }
 
     calculateBalances(data){

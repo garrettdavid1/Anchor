@@ -56,7 +56,6 @@ export class Week extends React.Component{
             return startingBal;
         } else{
             let totalExpenses = 0;
-            let expense;
             transactions.forEach(function (trans) {
                 totalExpenses += parseFloat(trans.transAmount);
         });

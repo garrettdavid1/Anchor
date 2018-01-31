@@ -30,5 +30,54 @@ export const lib = {
         setTimeout(function(){
             $(selector).focus();
         }, 20)
+    },
+
+    exists: function(variable){
+        return (variable !== undefined && variable !== null);
+    },
+
+    xhrGet: function(endpoint, dataType, successFn, failFn, alwaysFn){
+        $.ajax({
+            url: endpoint,
+            type: 'get',
+            dataType: dataType,
+            xhrFields: {
+                withCredentials: true
+            },
+            credentials: 'include',
+            crossDomain: true
+        }).done(function (resp) {
+            if(lib.exists(successFn))
+            successFn(resp);
+        }).fail(function (resp) {
+            if(lib.exists(failFn))
+            failFn(resp);
+        }).always(function(resp){
+            if(lib.exists(alwaysFn))
+            alwaysFn(resp);
+        });
+    },
+
+    xhrPost: function(endpoint, dataType, formData, successFn, failFn, alwaysFn){
+        $.ajax({
+            url: endpoint,
+            type: 'post',
+            data: formData,
+            dataType: dataType,
+            xhrFields: {
+                withCredentials: true
+            },
+            credentials: 'include',
+            crossDomain: true
+        }).done(function (resp) {
+            if(lib.exists(successFn))
+            successFn(resp);
+        }).fail(function (resp) {
+            if(lib.exists(failFn))
+            failFn(resp);
+        }).always(function(resp){
+            if(lib.exists(alwaysFn))
+            alwaysFn(resp);
+        });
     }
 }

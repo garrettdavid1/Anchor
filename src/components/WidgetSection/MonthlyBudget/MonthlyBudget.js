@@ -24,7 +24,7 @@ export class MonthlyBudget extends React.Component{
     }
 
     componentWillMount(){
-        if(this.props.monthWasNull === true && this.props.date.getMonth() === new Date().getMonth()){
+        if(this.props.monthWasNull === true && this.props.date.getMonth() === new Date().getMonth() && this.props.date.getFullYear() === new Date().getFullYear()){
             this.setState({
                 startingModal : <StartingModal setInitialBalance={this.setInitialBalance} />
             })

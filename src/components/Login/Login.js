@@ -19,13 +19,17 @@ export class Login extends React.Component{
         this.onKeyDown = this.onKeyDown.bind(this);
     }
 
+    componentWillMount(){
+        this.handleUserInput(true);
+    }
+
     componentDidMount(){
         $('#emailInput').focus();
     }
     
     render(){
         return (
-            <div style={styles} onKeyDown={this.onKeyDown} tabIndex="0">
+            <div id="loginForm" style={styles} onKeyDown={this.onKeyDown} tabIndex="0" className="hidden">
                 <div style={formStyles}>
                 <div style={headerStyles}></div>
                     <h4>Login</h4>
@@ -39,19 +43,30 @@ export class Login extends React.Component{
         );
     }
 
-    handleUserInput(e){
+    handleUserInput(bypassInput){
         var self = this;
-        var formData = {
-            'date': new Date().toString(),
-            'email': $('#emailInput')[0].value,
-            'password': $('#passwordInput')[0].value
+        var formData;
+        if(bypassInput === true){
+            formData = {};
+        } else{
+            formData = {
+                'date': new Date().toString(),
+                'email': $('#emailInput')[0].value,
+                'password': $('#passwordInput')[0].value
+            }
         }
 
         lib.xhrPost(
             config.apiEndpointDomain + '/login',
             'json',
             formData,
-            function(resp){ self.state.allowAccess(resp); },
+            function(resp){ 
+                if(lib.exists(resp.transactions)){
+                    self.state.allowAccess(resp);
+                } else{
+                    $('#loginForm').removeClass('hidden');
+                }
+            },
             function(resp){ console.log(resp); }
         );
     }

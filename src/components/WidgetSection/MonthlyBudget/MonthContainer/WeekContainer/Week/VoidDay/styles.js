@@ -6,5 +6,5 @@ export const styles = {
     height: '50px',
     width: 'calc(100% / 7)',
     maxWidth: 'calc(100% / 7)',
-    backgroundColor: siteStyles.mainBackgroundColor
+    backgroundColor: 'oldlace'
 }

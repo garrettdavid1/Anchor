@@ -7,5 +7,6 @@ export const styles = {
     overflow: 'hidden',
     boxSizing: 'border-box',
     marginBottom: '10px',
-    backgroundColor: siteStyles.mainBackgroundColor
+    // backgroundColor: siteStyles.mainBackgroundColor
+    backgroundColor: 'oldlace'
 }

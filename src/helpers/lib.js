@@ -36,6 +36,10 @@ export const lib = {
         return (variable !== undefined && variable !== null);
     },
 
+    isEmpty: function(variable){
+        return variable === '';
+    },
+
     xhrGet: function(endpoint, dataType, successFn, failFn, alwaysFn){
         $.ajax({
             url: endpoint,

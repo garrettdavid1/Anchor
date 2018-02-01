@@ -19,6 +19,11 @@ body {
   opacity: 1 !important;
 }
 
+
+#loginForm{
+  transition: height 2s;
+}
+
 #root{
   height: 100vh;
 }

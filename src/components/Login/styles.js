@@ -6,7 +6,7 @@ export const styles = {
     backgroundColor: siteStyles.mainBackgroundColor
 }
 
-export const formStyles = {
+export let loginFormStyles = {
     position: 'fixed',
     backgroundColor: 'white',
     width: '300px',
@@ -16,7 +16,21 @@ export const formStyles = {
     zIndex: 1000,
     border: '1px solid black',
     borderRadius: '5px',
-    paddingBottom: '10px'
+    paddingBottom: '10px',
+    boxShadow: '5px 5px 5px black'
+}
+export let registerFormStyles = {
+    position: 'fixed',
+    backgroundColor: 'white',
+    width: '300px',
+    height: 'auto',
+    top: (window.innerHeight - 347)/ 2,
+    left: (window.innerWidth - 300) / 2,
+    zIndex: 1000,
+    border: '1px solid black',
+    borderRadius: '5px',
+    paddingBottom: '10px',
+    boxShadow: '5px 5px 5px black'
 }
 
 export const submitStyles = {
@@ -46,4 +60,9 @@ export const inputStyles = {
     width: 'calc(100% - 20px)',
     margin: '0px 10px 5px 10px',
     padding: '2px'
+}
+
+export const needOrHaveAcctStyles = {
+    cursor: 'pointer',
+    color: 'red'
 }

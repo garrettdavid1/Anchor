@@ -34,7 +34,7 @@ export let registerFormStyles = {
 }
 
 export const submitStyles = {
-    marginTop: '10px',
+    marginTop: '5px',
     borderRadius: '5px',
     width: 'calc(80% + 10px)'
 }
@@ -64,5 +64,11 @@ export const inputStyles = {
 
 export const needOrHaveAcctStyles = {
     cursor: 'pointer',
+    color: siteStyles.blue,
+    float: 'left',
+    marginLeft: '10px'
+}
+
+export const messageStyles = {
     color: 'red'
 }

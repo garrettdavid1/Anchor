@@ -62,8 +62,6 @@ class App extends Component {
   }
 
   allowAccess(data){
-    var self = this;
-
     data.startingBal = parseFloat(data.startingBal);
     data.transactions.forEach(function (trans) {
       trans.transDate = new Date(trans.transDate);

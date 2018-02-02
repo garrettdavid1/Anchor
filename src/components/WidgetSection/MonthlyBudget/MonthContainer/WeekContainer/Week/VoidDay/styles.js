@@ -1,5 +1,3 @@
-import {siteStyles} from '../../../../../../../siteStyles';
-
 export const styles = {
     boxSizing: 'border-box',
     border: '2px solid black',

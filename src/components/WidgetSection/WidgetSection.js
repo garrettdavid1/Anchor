@@ -4,7 +4,6 @@ import {containerStyles} from './styles';
 import {loadingStatusStyles} from './styles';
 import {MonthlyBudget} from './MonthlyBudget/MonthlyBudget'
 import {TransactionLogs} from './TransactionLogs/TransactionLogs'
-import $ from './../../../node_modules/jquery/src/jquery'
 import {config} from '../../config'
 import {lib} from '../../helpers/lib'
 

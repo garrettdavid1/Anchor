@@ -96,7 +96,7 @@ export class Login extends React.Component{
     
                     if(resp.result === 'failure' && !self.state.isInitialLoad){
                         self.setMessage(resp.message, 'red');
-                    } else{
+                    } else if(!lib.exists(resp.transactions)){
                         self.setState({ isInitialLoad: false });
                     }
 
@@ -208,6 +208,7 @@ export class Login extends React.Component{
     }
 
     setMessage(message, color){
+        let messageTimer;
         if(lib.exists(messageTimer)) clearTimeout(messageTimer);
         this.setState({
             message: message,
@@ -217,7 +218,7 @@ export class Login extends React.Component{
 
         let loginMessage = $('#loginMessage');
         loginMessage.removeClass('hidden');
-        let messageTimer = setTimeout(function () {
+        messageTimer = setTimeout(function () {
             loginMessage.addClass('hidden');
         }, 5000);
     }

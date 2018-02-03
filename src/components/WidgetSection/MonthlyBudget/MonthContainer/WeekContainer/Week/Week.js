@@ -77,13 +77,16 @@ export class Week extends React.Component{
         let numOfPlaceholders = 0;
         let endingBal = 0;
 
-        //Gets the highest count of days for adding placeholder transactions
-        for(var x = num; x <= (num + daysToAdd); x++){
+        function countTransactionsPerDay(x){
             transactions.forEach(function(trans){
                 if(trans.transDate.getDate() === x){
                     numOfTransForThisDay++;
                 }
             });
+        }
+        //Gets the highest count of days for adding placeholder transactions
+        for(var x = num; x <= (num + daysToAdd); x++){
+            countTransactionsPerDay(x);
             highestDailyTransCount = numOfTransForThisDay > highestDailyTransCount ? numOfTransForThisDay : highestDailyTransCount;
             numOfTransForThisDay = 0;
         }

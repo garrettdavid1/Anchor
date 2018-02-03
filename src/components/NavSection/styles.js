@@ -26,3 +26,8 @@ export const optionsStyles = {
     top: '10px',
     backgroundColor: siteStyles.mainBackgroundColor
 }
+
+export const indivOptionStyles = {
+    backgroundColor: 'red', 
+    color: 'white', 
+    height: '20px'}

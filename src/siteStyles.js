@@ -7,5 +7,6 @@ export const siteStyles = {
     green: '#BBCC84',
     gold: '#FFE221',
     gray: '#D3D4D9',
-    mainBackgroundColor: '#628CCC'
+    mainBackgroundColor: '#628CCC',
+    widgetBackground: 'oldlace'
 }

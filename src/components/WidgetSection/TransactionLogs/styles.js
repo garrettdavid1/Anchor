@@ -5,5 +5,6 @@ export const styles = {
     height: '100%',
     borderTop: '1px solid black',
     padding: '10px',
-    backgroundColor: siteStyles.mainBackgroundColor
+    backgroundColor: siteStyles.mainBackgroundColor,
+    // marginBottom: '10px'
 }

@@ -1,3 +1,5 @@
+import {siteStyles} from '../../../../siteStyles'
+
 export const styles = {
     minHeight: '200px',
     height: '100%',
@@ -6,5 +8,5 @@ export const styles = {
     boxSizing: 'border-box',
     marginBottom: '10px',
     // backgroundColor: siteStyles.mainBackgroundColor
-    backgroundColor: 'oldlace'
+    backgroundColor: siteStyles.widgetBackground
 }

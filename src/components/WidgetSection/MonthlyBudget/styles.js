@@ -1,3 +1,5 @@
+import {siteStyles} from '../../../siteStyles'
+
 export const styles = {
     boxSizing: 'border-box',
     height: '100%',
@@ -6,6 +8,6 @@ export const styles = {
     marginTop: '10px',
     marginBottom: '10px',
     // backgroundColor: siteStyles.mainBackgroundColor
-    backgroundColor: 'oldlace',
+    backgroundColor: siteStyles.widgetBackground,
     boxShadow: 'black 5px 5px 5px'
 }

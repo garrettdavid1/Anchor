@@ -1,3 +1,3 @@
 export const config = {
-    apiEndpointDomain: 'http://localhost:1337'
+    apiEndpointDomain: 'https://peaceful-woodland-61112.herokuapp.com/' || 'http://localhost:1337'
 }

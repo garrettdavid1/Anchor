@@ -2,7 +2,8 @@ import React from 'react';
 import {styles} from './styles';
 import {submitStyles} from './styles';
 import {ModalBackdrop} from '../../../ModalBackdrop/ModalBackdrop';
-import $ from '../../../../../node_modules/jquery/src/jquery'
+// import $ from '../../../../../node_modules/jquery/src/jquery'
+import $ from 'jquery';
 
 export class StartingModal extends React.Component{
     constructor(props){

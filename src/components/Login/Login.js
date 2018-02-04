@@ -7,7 +7,8 @@ import {inputStyles} from './styles';
 import {labelStyles} from './styles';
 import {submitStyles} from './styles';
 import {needOrHaveAcctStyles} from './styles';
-import $ from '../../../node_modules/jquery/src/jquery';
+// import $ from '../../../node_modules/jquery/src/jquery';
+import $ from 'jquery';
 import {config} from '../../config';
 import {lib} from '../../helpers/lib';
 

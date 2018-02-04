@@ -3,7 +3,8 @@ import {styles} from './styles'
 import {optionsStyles} from './styles'
 import {indivOptionStyles} from './styles'
 import {optionsIconStyles} from './styles'
-import $ from '../../../node_modules/jquery/src/jquery'
+// import $ from '../../../node_modules/jquery/src/jquery'
+import $ from 'jquery';
 import {lib} from '../../helpers/lib'
 import {config} from '../../config'
 

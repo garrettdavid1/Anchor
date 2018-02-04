@@ -1,5 +1,6 @@
 
-import $ from '../../node_modules/jquery/src/jquery'
+// import $ from '../../node_modules/jquery/src/jquery'
+import $ from 'jquery';
 
 export const lib = {
     hideTransactionsForSmallScreens: function () {

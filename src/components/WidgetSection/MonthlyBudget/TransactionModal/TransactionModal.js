@@ -8,7 +8,8 @@ import {labelStyles} from './styles';
 import {inputStyles} from './styles';
 import {cancelStyles} from './styles';
 import {ModalBackdrop} from '../../../ModalBackdrop/ModalBackdrop';
-import $ from '../../../../../node_modules/jquery/src/jquery'
+// import $ from '../../../../../node_modules/jquery/src/jquery'
+import $ from 'jquery';
 
 export class TransactionModal extends React.Component{
     constructor(props){

@@ -5,6 +5,7 @@
   "homepage": "https://garrettdavid1.github.io/Anchor",
   "dependencies": {
     "bootstrap": "^3.3.7",
+    "jquery": "^3.3.1",
     "react": "^16.2.0",
     "react-bootstrap": "^0.32.0",
     "react-dom": "^16.2.0",

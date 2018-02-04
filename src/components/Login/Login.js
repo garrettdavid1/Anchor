@@ -84,7 +84,6 @@ export class Login extends React.Component{
         }
 
         if((lib.exists(email) && !lib.isEmpty(email) && lib.exists(password) && !lib.isEmpty(password) && self.emailIsValid(email)) || this.state.isInitialLoad){
-            console.log(config.apiEndpointDomain);
             lib.xhrPost(
                 config.apiEndpointDomain + '/login',
                 'json',

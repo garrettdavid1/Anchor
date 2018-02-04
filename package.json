@@ -2,7 +2,7 @@
   "name": "anchor",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://garrettdavid1.github.io/Anchor",
+  "homepage": "https://lit-falls-86153.herokuapp.com/",
   "dependencies": {
     "bootstrap": "^3.3.7",
     "jquery": "^3.3.1",

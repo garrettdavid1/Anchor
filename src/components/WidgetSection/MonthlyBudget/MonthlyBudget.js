@@ -48,6 +48,8 @@ export class MonthlyBudget extends React.Component{
     }
 
     render(){
+        let copyOfTrans = this.state.transactions.slice(0);
+
         return (
         <div style={styles}>
             <MonthContainer 
@@ -57,7 +59,12 @@ export class MonthlyBudget extends React.Component{
                 endingBal={this.state.endingBal}
                 openTransactionModal={this.openTransactionModal} 
                 saveTransaction={this.saveTransaction}/>
-            <MonthlyBudgetSummary transactions={this.state.transactions} startingBal={this.state.startingBal} endingBal={this.state.endingBal} totalEarnings={this.state.totalEarnings} totalExpenses={this.state.totalExpenses}/>
+            <MonthlyBudgetSummary 
+                transactions={copyOfTrans} 
+                startingBal={this.state.startingBal} 
+                endingBal={this.state.endingBal} 
+                totalEarnings={this.state.totalEarnings} 
+                totalExpenses={this.state.totalExpenses}/>
             {this.state.startingModal}
             {this.state.transactionModal}
         </div>

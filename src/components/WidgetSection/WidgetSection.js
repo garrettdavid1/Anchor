@@ -43,6 +43,8 @@ export class WidgetSection extends React.Component{
     }
 
     render(){
+        let copyOfTrans = this.state.data.transactions.slice(0);
+
         if(this.state.dataLoaded){
             const widgets = this.props.widgets.map(widget => {
                 switch(widget){
@@ -65,7 +67,7 @@ export class WidgetSection extends React.Component{
                     case 'transactionLogs':
                         return (
                             <div key={widget} className="widget" style={styles}>
-                                <TransactionLogs date={this.props.date} transactions={this.state.data.transactions} />
+                                <TransactionLogs date={this.props.date} transactions={copyOfTrans} />
                             </div>
                         );
                     default:

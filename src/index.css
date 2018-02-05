@@ -72,5 +72,5 @@ body {
 }
 
 #widgetContainer::-webkit-scrollbar-thumb, #monthlySummaryContent::-webkit-scrollbar-thumb {
-  /* background-color: #020C4C; */
+  background-color: #020C4C;
 }

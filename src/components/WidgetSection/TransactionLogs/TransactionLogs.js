@@ -4,6 +4,7 @@ import {tableStyles} from './styles';
 import {headerRowStyles} from './styles';
 import {headerStyles} from './styles';
 import {cellStyles} from './styles';
+import {WidgetHeader} from '../WidgetHeader/WidgetHeader'
 
 export class TransactionLogs extends React.Component{
     constructor(props){
@@ -34,7 +35,7 @@ export class TransactionLogs extends React.Component{
         this.state.transactions.reverse();
         let transactions = this.state.transactions.map(transaction => {
             let date = this.formatDateTime(transaction.transDate, 'date', false);
-            let amount = transaction.transType === 'expense' ? '-$' + Math.abs(transaction.transAmount).toFixed(2) : '+$' + transaction.transAmount.toFixed(2);
+            let amount = transaction.transType === 'expense' ? '- $' + Math.abs(transaction.transAmount).toFixed(2) : '+ $' + transaction.transAmount.toFixed(2);
             return  <tr>
                         <td style={cellStyles}>{date}</td>
                         <td style={cellStyles}>{transaction.transName}</td>
@@ -44,6 +45,7 @@ export class TransactionLogs extends React.Component{
 
         return (
             <div id="transactionLogsContainer" style={styles}>
+                <WidgetHeader name="Transaction Log" />
                 <table id="transactionsTable" style={tableStyles}>
                     <tbody style={headerRowStyles}>
                         <tr>

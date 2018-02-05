@@ -5,6 +5,7 @@ import {MonthContainer} from './MonthContainer/MonthContainer'
 import {StartingModal} from './StartingModal/StartingModal'
 import {TransactionModal} from './TransactionModal/TransactionModal'
 import {lib} from '../../../helpers/lib'
+import {WidgetHeader} from '../WidgetHeader/WidgetHeader'
 
 export class MonthlyBudget extends React.Component{
     constructor(props){
@@ -52,6 +53,7 @@ export class MonthlyBudget extends React.Component{
 
         return (
         <div style={styles}>
+            <WidgetHeader name="Monthly Budget" />
             <MonthContainer 
                 date={this.state.date} 
                 transactions={this.state.transactions} 

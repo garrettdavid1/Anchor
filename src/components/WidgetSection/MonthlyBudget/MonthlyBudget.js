@@ -15,7 +15,9 @@ export class MonthlyBudget extends React.Component{
             date: this.props.date,
             transactions: this.props.transactions,
             startingBal: this.props.startingBal,
-            endingBal: this.props.endingBal
+            endingBal: this.props.endingBal,
+            totalEarnings: this.props.totalEarnings,
+            totalExpenses: this.props.totalExpenses
         }
         this.setInitialBalance = this.setInitialBalance.bind(this);
         this.openTransactionModal = this.openTransactionModal.bind(this);
@@ -38,7 +40,9 @@ export class MonthlyBudget extends React.Component{
                 date: nextProps.date,
                 transactions: nextProps.transactions,
                 startingBal: nextProps.startingBal,
-                endingBal: nextProps.endingBal
+                endingBal: nextProps.endingBal,
+                totalEarnings: nextProps.totalEarnings,
+                totalExpenses: nextProps.totalExpenses
             })
         }
     }
@@ -53,7 +57,7 @@ export class MonthlyBudget extends React.Component{
                 endingBal={this.state.endingBal}
                 openTransactionModal={this.openTransactionModal} 
                 saveTransaction={this.saveTransaction}/>
-            <MonthlyBudgetSummary transactions={this.state.transactions} startingBal={this.state.startingBal} />
+            <MonthlyBudgetSummary transactions={this.state.transactions} startingBal={this.state.startingBal} endingBal={this.state.endingBal} totalEarnings={this.state.totalEarnings} totalExpenses={this.state.totalExpenses}/>
             {this.state.startingModal}
             {this.state.transactionModal}
         </div>

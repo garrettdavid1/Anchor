@@ -26,13 +26,4 @@ export const loadingStatusStyles = {
     marginTop: '20px'
 }
 
-
-// minHeight: '25px',
-//     maxHeight: '10%',
-//     height: '10%',
-
-//     minHeight: '30px',
-//     maxHeight: '40px',
-//     height: '7.5%',
-
     

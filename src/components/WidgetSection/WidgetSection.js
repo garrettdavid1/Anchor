@@ -54,6 +54,8 @@ export class WidgetSection extends React.Component{
                                     transactions={this.state.data.transactions} 
                                     startingBal={this.state.data.startingBal} 
                                     endingBal={this.state.data.endingBal}
+                                    totalEarnings={this.state.data.totalEarnings}
+                                    totalExpenses={this.state.data.totalExpenses}
                                     monthWasNull={this.state.data.wasNull} 
                                     setInitialBalance={this.setInitialBalance} 
                                     saveTransaction={this.saveTransaction}

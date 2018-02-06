@@ -15,7 +15,7 @@ export class DateSection extends React.Component{
         const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
         return (
-            <div style={styles}>
+            <div id="dateSection" style={styles}>
                 <div style={dateStyles}>
                     <div id="lastMonth" className="glyphicon glyphicon-minus-sign clickable" style={dateManipulatorStyles} onClick={this.props.decrement}></div>&nbsp;
                     {monthNames[this.props.date.getMonth()]}&nbsp;

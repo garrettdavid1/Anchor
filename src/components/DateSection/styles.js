@@ -3,7 +3,7 @@ import {siteStyles} from '../../siteStyles'
 export const styles = {
     margin: '0px',
     minHeight: '25px',
-    maxHeight: '10%',
+    maxHeight: '60px',
     height: '10%',
     width: '100%',
     fontSize: '2em',

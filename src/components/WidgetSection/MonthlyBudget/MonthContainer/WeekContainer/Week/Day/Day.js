@@ -96,8 +96,11 @@ export class Day extends React.Component{
         }catch (e){
             return;
         }
-        data.transDate = new Date(this.state.date);
-        this.props.saveTransaction(data);
+
+        if(data.date !== this.state.date){
+            data.transDate = new Date(this.state.date);
+            this.props.saveTransaction(data);
+        }
     }
 
     preventDefault(e){

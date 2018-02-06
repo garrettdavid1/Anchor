@@ -35,7 +35,7 @@ class App extends Component {
     this.setState({
       date: date,
       content: 
-        <div>
+        <div style={{height: window.innerHeight + 'px'}}>
           <NavSection />
           <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement} />
           <div style={shadowStyles}></div>
@@ -71,7 +71,7 @@ class App extends Component {
     
     this.setState({
       content: 
-        <div>
+        <div style={{height: window.innerHeight + 'px'}}>
           <NavSection />
           <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement} />
           <div style={shadowStyles}></div>

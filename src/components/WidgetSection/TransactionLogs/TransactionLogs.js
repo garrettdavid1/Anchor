@@ -36,7 +36,7 @@ export class TransactionLogs extends React.Component{
         let transactions = this.state.transactions.map(transaction => {
             let date = this.formatDateTime(transaction.transDate, 'date', false);
             let amount = transaction.transType === 'expense' ? '- $' + Math.abs(transaction.transAmount).toFixed(2) : '+ $' + transaction.transAmount.toFixed(2);
-            return  <tr>
+            return  <tr key={'Trans-' + transaction._id}>
                         <td style={cellStyles}>{date}</td>
                         <td style={cellStyles}>{transaction.transName}</td>
                         <td style={cellStyles}>{amount}</td>

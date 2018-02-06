@@ -53,7 +53,7 @@ export class NavSection extends React.Component{
         return (
         <div style={styles}>
             <i style={optionsIconStyles} className="glyphicon glyphicon-cog" onClick={this.showOptions} />
-            <div id="options"  className="hidden" style={optionsStyles}>
+            <div id="options" className="hidden" style={optionsStyles}>
                 <div className="option" style={indivOptionStyles} onClick={this.logout}>Logout</div>
             </div>
         </div>

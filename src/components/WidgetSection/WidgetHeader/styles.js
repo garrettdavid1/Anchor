@@ -1,5 +1,3 @@
-import {siteStyles} from '../../../siteStyles'
-
 export const styles = {
     minHeight: '30px',
     maxHeight: '40px',

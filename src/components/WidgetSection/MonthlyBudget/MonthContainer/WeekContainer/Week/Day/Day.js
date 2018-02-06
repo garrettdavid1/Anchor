@@ -99,6 +99,7 @@ export class Day extends React.Component{
 
         if(data.date !== this.state.date){
             data.transDate = new Date(this.state.date);
+            delete data.date;
             this.props.saveTransaction(data);
         }
     }

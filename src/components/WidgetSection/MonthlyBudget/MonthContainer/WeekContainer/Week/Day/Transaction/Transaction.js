@@ -49,8 +49,8 @@ export class Transaction extends React.Component{
             _id: this.state.id,
             transName: this.state.name,
             transAmount: this.state.amount,
-            date: this.state.date,
-            type: transType
+            transDate: this.state.date,
+            transType: transType
         }
         e.dataTransfer.setData('text', JSON.stringify(data));
     }

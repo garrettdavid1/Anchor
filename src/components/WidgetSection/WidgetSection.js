@@ -2,14 +2,15 @@ import React from 'react';
 import {styles} from './styles';
 import {containerStyles} from './styles';
 import {loadingStatusStyles} from './styles';
-import {MonthlyBudget} from './MonthlyBudget/MonthlyBudget'
-import {TransactionLogs} from './TransactionLogs/TransactionLogs'
-import {config} from '../../config'
-import {lib} from '../../helpers/lib'
+import {MonthlyBudget} from './MonthlyBudget/MonthlyBudget';
+import {TransactionLogs} from './TransactionLogs/TransactionLogs';
+import {config} from '../../config';
+import {lib} from '../../helpers/lib';
 
 export class WidgetSection extends React.Component{
     constructor(props){
         super(props);
+        
         this.state = {
             date: this.props.date,
             data: undefined,
@@ -23,7 +24,6 @@ export class WidgetSection extends React.Component{
     }
 
     componentWillMount() {
-        // this.getData(this.props.date.getMonth(), this.props.date.getFullYear());
         this.setState({
             data: this.props.initData,
             dataLoaded: true

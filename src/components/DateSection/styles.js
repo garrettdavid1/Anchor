@@ -2,9 +2,10 @@ import {siteStyles} from '../../siteStyles'
 
 export const styles = {
     margin: '0px',
-    minHeight: '25px',
-    maxHeight: '60px',
-    height: '10%',
+    // minHeight: '25px',
+    // maxHeight: '60px',
+    // height: '10%',
+    height: '9vh',
     width: '100%',
     fontSize: '2em',
     fontWeight: '900',

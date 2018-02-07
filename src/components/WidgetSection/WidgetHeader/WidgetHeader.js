@@ -12,7 +12,13 @@ export class WidgetHeader extends React.Component{
     render(){
 
         return (
-            <div style={styles}>{this.props.name}</div>
+            <div style={styles}>
+                <div style={{display: 'inline-block'}}>{this.props.name}</div>
+                <div style={{float: 'right', zIndex: '1'}}>
+                    <i id="collapseWidget" className="glyphicon glyphicon-chevron-up" onClick={this.props.collapseWidget}/>
+                    <i id="uncollapseWidget" className="glyphicon glyphicon-chevron-down hidden" onClick={this.props.uncollapseWidget} />
+                </div>
+            </div>
         );
     }
 }

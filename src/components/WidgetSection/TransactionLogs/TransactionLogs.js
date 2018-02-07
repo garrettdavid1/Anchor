@@ -45,7 +45,7 @@ export class TransactionLogs extends React.Component{
 
         return (
             <div id="transactionLogsContainer" style={styles}>
-                <WidgetHeader name="Transaction Log" />
+                <WidgetHeader name="Transaction Log" collapseWidget={this.props.collapseWidget} uncollapseWidget={this.props.uncollapseWidget} />
                 <table id="transactionsTable" style={tableStyles}>
                     <tbody style={headerRowStyles}>
                         <tr>

@@ -1,7 +1,5 @@
 export const styles = {
-    minHeight: '30px',
-    maxHeight: '40px',
-    height: '7.5%',
+    height: '40px',
     width: '100%',
     borderBottom: '1px solid #eeaa2b',
     marginBottom: '10px',

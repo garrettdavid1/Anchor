@@ -6,6 +6,7 @@ import {MonthlyBudget} from './MonthlyBudget/MonthlyBudget';
 import {TransactionLogs} from './TransactionLogs/TransactionLogs';
 import {config} from '../../config';
 import {lib} from '../../helpers/lib';
+import $ from 'jquery';
 
 export class WidgetSection extends React.Component{
     constructor(props){
@@ -21,6 +22,8 @@ export class WidgetSection extends React.Component{
         this.setInitialBalance = this.setInitialBalance.bind(this);
         this.saveTransaction = this.saveTransaction.bind(this);
         this.deleteTransaction = this.deleteTransaction.bind(this);
+        this.collapseWidget = this.collapseWidget.bind(this);
+        this.uncollapseWidget = this.uncollapseWidget.bind(this);
     }
 
     componentWillMount() {
@@ -64,13 +67,19 @@ export class WidgetSection extends React.Component{
                                     monthWasNull={this.state.data.wasNull} 
                                     setInitialBalance={this.setInitialBalance} 
                                     saveTransaction={this.saveTransaction}
-                                    deleteTransaction={this.deleteTransaction}/>
+                                    deleteTransaction={this.deleteTransaction}
+                                    collapseWidget={this.collapseWidget} 
+                                    uncollapseWidget={this.uncollapseWidget}/>
                             </div>
                         );
                     case 'transactionLogs':
                         return (
                             <div key={widget} className="widget" style={styles}>
-                                <TransactionLogs date={this.props.date} transactions={copyOfTrans} />
+                                <TransactionLogs 
+                                    date={this.props.date} 
+                                    transactions={copyOfTrans} 
+                                    collapseWidget={this.collapseWidget} 
+                                    uncollapseWidget={this.uncollapseWidget}/>
                             </div>
                         );
                     default:
@@ -210,4 +219,22 @@ export class WidgetSection extends React.Component{
         });
         return data;
       }
+
+    collapseWidget(e){
+        var widget = $(e.target).parent().parent().parent();
+        for(var i = 1; i < widget.children().length; i++){
+            $(widget.children()[i]).addClass('hidden');
+        }
+        $(e.target).siblings().removeClass('hidden');
+        $(e.target).addClass('hidden');
+    }  
+
+    uncollapseWidget(e){
+        var widget = $(e.target).parent().parent().parent();
+        for(var i = 1; i < widget.children().length; i++){
+            $(widget.children()[i]).removeClass('hidden');
+        }
+        $(e.target).addClass('hidden');
+        $(e.target).siblings().removeClass('hidden');
+    }  
 }

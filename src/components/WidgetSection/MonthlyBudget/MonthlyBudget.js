@@ -53,7 +53,7 @@ export class MonthlyBudget extends React.Component{
 
         return (
         <div style={styles}>
-            <WidgetHeader name="Monthly Budget" />
+            <WidgetHeader name="Monthly Budget" collapseWidget={this.props.collapseWidget} uncollapseWidget={this.props.uncollapseWidget}/>
             <MonthContainer 
                 date={this.state.date} 
                 transactions={this.state.transactions} 

@@ -43,7 +43,10 @@ export class WidgetSection extends React.Component{
     }
 
     render(){
-        let copyOfTrans = this.state.data.transactions.slice(0);
+        let copyOfTrans = [];
+        if(lib.exists(this.state.data)){
+            copyOfTrans = this.state.data.transactions.slice(0);
+        }
 
         if(this.state.dataLoaded){
             const widgets = this.props.widgets.map(widget => {

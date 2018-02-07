@@ -21,7 +21,7 @@ export const headerRowStyles = {
     width: '100%'
 }
 
-export const headerStyles = {
+export const headerStyles = {   
     padding: '2px',
     width: '20%', 
     minWidth: '50px',

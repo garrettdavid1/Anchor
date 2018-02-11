@@ -41,7 +41,7 @@ export class MonthContainer extends React.Component{
 
     render(){
         return (
-            <div id="monthContainer">
+            <div id="monthContainer" className="hidden">
                 <DaysOfTheWeek />
                 <WeekContainer date={this.props.date} transactions={this.props.transactions} startingBal={this.props.startingBal} openTransactionModal={this.props.openTransactionModal} saveTransaction={this.props.saveTransaction}/>
             </div>

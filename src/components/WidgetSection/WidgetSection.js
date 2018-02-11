@@ -14,9 +14,11 @@ export class WidgetSection extends React.Component{
         
         this.state = {
             date: this.props.date,
-            data: undefined,
+            data: this.props.initData,
             dataLoaded: undefined,
-            loadingStatus: 'Waiting for data...'
+            loadingStatus: 'Waiting for data...',
+            transactionLogCollapsed: false,
+            monthlyBudgetCollapsed: false
         }
         this.getData = this.getData.bind(this);
         this.setInitialBalance = this.setInitialBalance.bind(this);
@@ -45,10 +47,21 @@ export class WidgetSection extends React.Component{
         lib.hideLastMonthButtonIfNotExists(this.props.initData.isFirstAvailableMonth);
     }
 
+    // shouldComponentUpdate(nextProps, nextState){
+    //     if(this.state.dataLoaded){
+    //         return false;
+    //     }
+    //     return true;
+    // }
+
     render(){
         let copyOfTrans = [];
         if(lib.exists(this.state.data)){
             copyOfTrans = this.state.data.transactions.slice(0);
+        }
+
+        if(copyOfTrans.length === 0){
+            copyOfTrans = null;
         }
 
         if(this.state.dataLoaded){
@@ -69,7 +82,8 @@ export class WidgetSection extends React.Component{
                                     saveTransaction={this.saveTransaction}
                                     deleteTransaction={this.deleteTransaction}
                                     collapseWidget={this.collapseWidget} 
-                                    uncollapseWidget={this.uncollapseWidget}/>
+                                    uncollapseWidget={this.uncollapseWidget}
+                                    collapsed={this.state.monthlyBudgetCollapsed}/>
                             </div>
                         );
                     case 'transactionLogs':
@@ -79,11 +93,12 @@ export class WidgetSection extends React.Component{
                                     date={this.props.date} 
                                     transactions={copyOfTrans} 
                                     collapseWidget={this.collapseWidget} 
-                                    uncollapseWidget={this.uncollapseWidget}/>
+                                    uncollapseWidget={this.uncollapseWidget}
+                                    collapsed={this.state.transactionLogCollapsed}/>
                             </div>
                         );
                     default:
-                        return <div></div>;
+                        return <div key={widget}></div>;
                 }
             });
     
@@ -218,23 +233,33 @@ export class WidgetSection extends React.Component{
           trans.endingBal = bal;
         });
         return data;
-      }
+    }
 
-    collapseWidget(e){
-        var widget = $(e.target).parent().parent().parent();
-        for(var i = 1; i < widget.children().length; i++){
-            $(widget.children()[i]).addClass('hidden');
+    collapseWidget(e, widgetName, mounting){
+        if(this.state[widgetName + 'Collapsed'] === false || mounting){
+            this.setState({
+                [widgetName + 'Collapsed'] : true
+            });
+            var widget = $(e.target).parent().parent().parent();
+            for(var i = 1; i < widget.children().length; i++){
+                $(widget.children()[i]).addClass('hidden');
+            }
+            $(e.target).siblings().removeClass('hidden');
+            $(e.target).addClass('hidden');
         }
-        $(e.target).siblings().removeClass('hidden');
-        $(e.target).addClass('hidden');
-    }  
+    }
 
-    uncollapseWidget(e){
-        var widget = $(e.target).parent().parent().parent();
-        for(var i = 1; i < widget.children().length; i++){
-            $(widget.children()[i]).removeClass('hidden');
+    uncollapseWidget(e, widgetName, mounting){
+        if(this.state[widgetName + 'Collapsed'] === true || mounting){
+            this.setState({
+                [widgetName + 'Collapsed'] : false
+            });
+            var widget = $(e.target).parent().parent().parent();
+            for(var i = 1; i < widget.children().length; i++){
+                $(widget.children()[i]).removeClass('hidden');
+            }
+            $(e.target).addClass('hidden');
+            $(e.target).siblings().removeClass('hidden');
         }
-        $(e.target).addClass('hidden');
-        $(e.target).siblings().removeClass('hidden');
     }  
 }

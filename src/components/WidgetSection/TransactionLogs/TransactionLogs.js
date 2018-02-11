@@ -4,27 +4,43 @@ import {tableStyles} from './styles';
 import {headerRowStyles} from './styles';
 import {headerStyles} from './styles';
 import {cellStyles} from './styles';
-import {WidgetHeader} from '../WidgetHeader/WidgetHeader'
+import {noTransCellStyles} from './styles';
+import {WidgetHeader} from '../WidgetHeader/WidgetHeader';
+import {lib} from '../../../helpers/lib';
+import $ from 'jquery';
 
 export class TransactionLogs extends React.Component{
     constructor(props){
         super(props);
         this.state = {
             date: this.props.date,
-            transactions: this.props.transactions
+            transactions: this.props.transactions,
+            collapsed: this.props.collapsed,
+            mounting: true
         }
-        this.formatDateTime = this.formatDateTime.bind(this);
+        this.handleCollapse = this.handleCollapse.bind(this);
+        this.handleUncollapse = this.handleUncollapse.bind(this);
+    }
+
+    componentDidMount(){
+        if(this.state.collapsed){
+            $('#collapse-transactionLog').trigger('click');
+        } else{
+            $('#uncollapse-transactionLog').trigger('click');
+        }
     }
 
     componentWillReceiveProps(nextProps){
-        this.setState({
-            date: nextProps.date,
-            transactions: nextProps.transactions
-        })
+        if(lib.exists(nextProps.transactions)){
+            this.setState({
+                date: nextProps.date,
+                transactions: nextProps.transactions
+            })
+        }
     }
 
     shouldComponentUpdate(nextProps, nextState){
-        if(nextProps.date !== this.state.date || nextProps.transactions !== this.state.transactions){
+        if(lib.exists(nextProps.transactions)){
             return true;
         }
 
@@ -32,9 +48,11 @@ export class TransactionLogs extends React.Component{
     }
 
     render(){
-        this.state.transactions.reverse();
-        let transactions = this.state.transactions.map(transaction => {
-            let date = this.formatDateTime(transaction.transDate, 'date', false);
+        let transactions = [];
+        if(lib.exists(this.state.transactions)){
+            this.state.transactions.reverse();
+            transactions = this.state.transactions.map(transaction => {
+            let date = lib.formatDateTime(transaction.transDate, 'date', false);
             let amount = transaction.transType === 'expense' ? '- $' + Math.abs(transaction.transAmount).toFixed(2) : '+ $' + transaction.transAmount.toFixed(2);
             return  <tr key={'Trans-' + transaction._id}>
                         <td style={cellStyles}>{date}</td>
@@ -42,11 +60,24 @@ export class TransactionLogs extends React.Component{
                         <td style={cellStyles}>{amount}</td>
                     </tr>
         });
+        }
+        
+
+        if(transactions.length < 1){
+            transactions = 
+                <tr>
+                    <td style={noTransCellStyles} colSpan="3">No Transactions Found.</td>
+                </tr>
+        }
 
         return (
-            <div id="transactionLogsContainer" style={styles}>
-                <WidgetHeader name="Transaction Log" collapseWidget={this.props.collapseWidget} uncollapseWidget={this.props.uncollapseWidget} />
-                <table id="transactionsTable" style={tableStyles}>
+            <div id="transactionLogContainer" style={styles}>
+                <WidgetHeader name="Transaction Log" 
+                    collapseWidget={this.handleCollapse} 
+                    uncollapseWidget={this.handleUncollapse} 
+                    collapsed={this.state.collapsed}
+                    widgetName="transactionLog"/>
+                <table id="transactionsTable" style={tableStyles} className="hidden">
                     <tbody style={headerRowStyles}>
                         <tr>
                             <th style={headerStyles}>Date</th>
@@ -62,39 +93,21 @@ export class TransactionLogs extends React.Component{
         );
     }
 
-    formatDateTime(date, returnType, includeSeconds) {
-        var dd = date.getDate();
-        var MM = date.getMonth() + 1;
-        var yyyy = date.getFullYear();
-        var hh = date.getHours();
-        hh = hh > 0 ? hh : 12;
-        var mm = date.getMinutes();
-        var ss = date.getSeconds();
-        var tt = 'AM';
-        ss = (ss < 10) ? '0' + ss : ss;
-        mm = (mm < 10) ? '0' + mm : mm;
-        if (hh > 12) {
-            hh -= 12;
-            tt = 'PM';
-        } else if(hh === 12){
-            tt = 'PM';
-        }
-    
-        var result;
-        switch (returnType) {
-        case 'time':
-            result = (includeSeconds) ? hh + ':' + mm + ':' + ss + ' ' + tt : hh + ':' + mm + ' ' + tt;
-            break;
-        case 'date':
-            result = MM + '/' + dd + '/' + yyyy;
-            break;
-        default:
-            result = (includeSeconds) ?
-                MM + '/' + dd + '/' + yyyy + ' ' + hh + ':' + mm + ':' + ss + ' ' + tt :
-                MM + '/' + dd + '/' + yyyy + ' ' + hh + ':' + mm + ' ' + tt;
-            break;
-        }
-        
-        return result;
+    handleCollapse(e){
+        var self = this;
+        this.props.collapseWidget(e, 'transactionLog', this.state.mounting);
+        self.setState({
+            collapsed: true,
+            mounting: false
+        });
+    }
+
+    handleUncollapse(e){
+        var self = this;
+        this.props.uncollapseWidget(e, 'transactionLog', this.state.mounting)
+        self.setState({
+            collapsed: false,
+            mounting: false
+        });
     }
 }

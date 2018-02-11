@@ -37,3 +37,13 @@ export const cellStyles = {
     fontWeight: 700,
     borderBottom: '1px solid gray'
 }
+
+export const noTransCellStyles = {
+    textAlign: 'center',
+    backgroundColor: 'white',
+    padding: '2px',
+    width: '20%', 
+    minWidth: '50px',
+    fontWeight: 700,
+    borderBottom: '1px solid gray'
+}

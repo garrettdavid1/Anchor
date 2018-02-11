@@ -17,7 +17,8 @@ class App extends Component {
     this.state = {
       date: today,
       content: <Login allowAccess={this.allowAccess} />,
-      user: undefined
+      user: undefined,
+      data: undefined
     };
     this.addMonth = this.addMonth.bind(this);
     this.increment = this.increment.bind(this);
@@ -62,6 +63,9 @@ class App extends Component {
   }
 
   allowAccess(data){
+    this.setState({
+      data: data
+    });
     data.startingBal = parseFloat(data.startingBal);
     data.transactions.forEach(function (trans) {
       trans.transDate = new Date(trans.transDate);
@@ -75,7 +79,7 @@ class App extends Component {
           <NavSection />
           <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement} />
           <div style={shadowStyles}></div>
-          <WidgetSection widgets={this.widgets} date={this.state.date} initData={data} />
+          <WidgetSection widgets={this.widgets} date={this.state.date} initData={this.state.data} />
         </div>,
       userName: data.userName
     })

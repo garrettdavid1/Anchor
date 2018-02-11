@@ -1,11 +1,12 @@
 import React from 'react';
 import {styles} from './styles';
-import {MonthlyBudgetSummary} from './MonthlyBudgetSummary/MonthlyBudgetSummary'
-import {MonthContainer} from './MonthContainer/MonthContainer'
-import {StartingModal} from './StartingModal/StartingModal'
-import {TransactionModal} from './TransactionModal/TransactionModal'
-import {lib} from '../../../helpers/lib'
-import {WidgetHeader} from '../WidgetHeader/WidgetHeader'
+import {MonthlyBudgetSummary} from './MonthlyBudgetSummary/MonthlyBudgetSummary';
+import {MonthContainer} from './MonthContainer/MonthContainer';
+import {StartingModal} from './StartingModal/StartingModal';
+import {TransactionModal} from './TransactionModal/TransactionModal';
+import {lib} from '../../../helpers/lib';
+import {WidgetHeader} from '../WidgetHeader/WidgetHeader';
+import $ from 'jquery';
 
 export class MonthlyBudget extends React.Component{
     constructor(props){
@@ -18,12 +19,16 @@ export class MonthlyBudget extends React.Component{
             startingBal: this.props.startingBal,
             endingBal: this.props.endingBal,
             totalEarnings: this.props.totalEarnings,
-            totalExpenses: this.props.totalExpenses
+            totalExpenses: this.props.totalExpenses,
+            collapsed: this.props.collapsed,
+            mounting: true
         }
         this.setInitialBalance = this.setInitialBalance.bind(this);
         this.openTransactionModal = this.openTransactionModal.bind(this);
         this.closeTransactionModal = this.closeTransactionModal.bind(this);
         this.saveTransaction = this.saveTransaction.bind(this);
+        this.handleCollapse = this.handleCollapse.bind(this);
+        this.handleUncollapse = this.handleUncollapse.bind(this);
     }
 
     componentWillMount(){
@@ -32,6 +37,14 @@ export class MonthlyBudget extends React.Component{
                 startingModal : <StartingModal setInitialBalance={this.setInitialBalance} />
             })
             lib.setFocus('#startingBalInput');
+        }
+    }
+
+    componentDidMount(){
+        if(this.state.collapsed){
+            $('#collapse-monthlyBudget').trigger('click');
+        } else{
+            $('#uncollapse-monthlyBudget').trigger('click');
         }
     }
 
@@ -53,7 +66,11 @@ export class MonthlyBudget extends React.Component{
 
         return (
         <div style={styles}>
-            <WidgetHeader name="Monthly Budget" collapseWidget={this.props.collapseWidget} uncollapseWidget={this.props.uncollapseWidget}/>
+            <WidgetHeader name="Monthly Budget" 
+                collapseWidget={this.handleCollapse} 
+                uncollapseWidget={this.handleUncollapse}
+                collapsed={this.state.collapsed}
+                widgetName="monthlyBudget"/>
             <MonthContainer 
                 date={this.state.date} 
                 transactions={this.state.transactions} 
@@ -61,7 +78,7 @@ export class MonthlyBudget extends React.Component{
                 endingBal={this.state.endingBal}
                 openTransactionModal={this.openTransactionModal} 
                 saveTransaction={this.saveTransaction}/>
-            <MonthlyBudgetSummary 
+            <MonthlyBudgetSummary
                 transactions={copyOfTrans} 
                 startingBal={this.state.startingBal} 
                 endingBal={this.state.endingBal} 
@@ -105,5 +122,21 @@ export class MonthlyBudget extends React.Component{
     saveTransaction(transaction){
         this.props.saveTransaction(transaction);
         this.closeTransactionModal();
+    }
+
+    handleCollapse(e){
+        this.props.collapseWidget(e, 'monthlyBudget', this.state.mounting);
+        this.setState({
+            collapsed: true,
+            mounting: false
+        });
+    }
+
+    handleUncollapse(e){
+        this.props.uncollapseWidget(e, 'monthlyBudget', this.state.mounting);
+        this.setState({
+            collapsed: false,
+            mounting: false
+        });
     }
 }

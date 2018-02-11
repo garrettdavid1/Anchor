@@ -34,7 +34,7 @@ export class MonthlyBudgetSummary extends React.Component{
 
     render(){
         return (
-        <div id="monthlySummary" style={styles}>
+        <div id="monthlySummary" className="hidden" style={styles}>
             <MonthlyBudgetSummaryContent transactions={this.state.transactions} startingBal={this.state.startingBal} endingBal={this.state.endingBal} totalEarnings={this.state.totalEarnings} totalExpenses={this.state.totalExpenses}/>
         </div>
         );

@@ -10,7 +10,7 @@ export const styles = {
     overflow: 'hidden',
     boxSizing: 'border-box',
     padding: '0px',
-    boxShadow: '5px 5px 5px black'
+    boxShadow: '3px 3px 3px black'
 }
 
 export const headerStyles = {

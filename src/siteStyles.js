@@ -4,9 +4,9 @@ export const siteStyles = {
     darkBlue: '#020C4C',
     purple: '#67597A',
     blue: '#628CCC',
-    green: '#BBCC84',
+    green: 'rgb(187, 204, 132)',
     gold: '#FFE221',
     gray: '#D3D4D9',
     mainBackgroundColor: '#628CCC',
-    widgetBackground: 'oldlace'
+    widgetBackground: 'rgba(253, 245, 230, .9)'
 }

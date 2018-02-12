@@ -59,6 +59,7 @@ export class TransactionModal extends React.Component{
                     <input id="transNameInput" style={inputStyles} type="text" defaultValue={this.state.name} onChange={this.updateNameState} />
                     <label style={labelStyles}>Amount</label>
                     <input id="transAmountInput" style={inputStyles} type="number" step=".01" defaultValue={this.state.amount} onChange={this.updateAmountState} />
+                    <hr />
                     <button type="button" className="btn btn-default" style={submitBtnStyles} onClick={this.handleUserInput}>Submit</button>
                     {deleteBtn}
                 </div>

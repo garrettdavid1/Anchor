@@ -1,5 +1,11 @@
 import React from 'react';
 import {styles} from './styles';
+import {actionStyles} from './styles';
+import {containerStyles} from './styles';
+import {backdropStyles} from './styles';
+import {openMessageStyles} from './styles';
+import {welcomeStyles} from './styles';
+import {anchorStyles} from './styles';
 import {loginFormStyles} from './styles';
 import {registerFormStyles} from './styles';
 import {headerStyles} from './styles';
@@ -47,20 +53,26 @@ export class Login extends React.Component{
     }
     
     render(){
+        let openMessage = window.innerHeight > 800 ? <div style={openMessageStyles}><div className="row" style={welcomeStyles}>Welcome to </div><hr /><div  style={anchorStyles} className="row">Anchor</div></div>: '';
         return (
-            <div id="loginForm" style={styles} onKeyDown={this.onKeyDown} tabIndex="0" className="hidden">
-                <div style={this.state.formStyles}>
-                    <div style={headerStyles}></div>
-                    <h4>{this.state.action}</h4>
-                    <label style={labelStyles} >Email</label>
-                    <input id="emailInput" style={inputStyles} type="email" onInput={this.validateEmail}/>
-                    {this.state.username}
-                    <label style={labelStyles}>Password</label>
-                    <input id="passwordInput" style={inputStyles} type="password"/>
-                    {this.state.confirmPassword}
-                    <div id="loginMessage" className="hidden" style={messageStyles}>{this.state.message}</div>
-                    {this.state.needOrHaveAcct}
-                    {this.state.submitBtn}
+            <div id="loginFormContainer" style={containerStyles}>
+                <div id="loginFormBackdrop" style={backdropStyles}>
+                    {openMessage}
+                </div>
+                <div id="loginForm" style={styles} onKeyDown={this.onKeyDown} tabIndex="0" className="hidden">
+                    <div style={this.state.formStyles}>
+                        {/* <div style={headerStyles}></div> */}
+                        <h4 style={actionStyles}>{this.state.action}</h4>
+                        <label style={labelStyles} >Email</label>
+                        <input id="emailInput" style={inputStyles} type="email" onInput={this.validateEmail}/>
+                        {this.state.username}
+                        <label style={labelStyles}>Password</label>
+                        <input id="passwordInput" style={inputStyles} type="password"/>
+                        {this.state.confirmPassword}
+                        <div id="loginMessage" className="hidden" style={messageStyles}>{this.state.message}</div>
+                        {this.state.needOrHaveAcct}
+                        {this.state.submitBtn}
+                    </div>
                 </div>
             </div>
         );

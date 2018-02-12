@@ -15,7 +15,7 @@ export const styles = {
 }
 
 export const submitStyles = {
-    marginTop: '10px',
+    marginTop: '5px',
     marginRight: '10px',
     borderRadius: '5px',
     width: '40%'
@@ -28,7 +28,7 @@ export const fullWidthBtnStyles = {
 }
 
 export const deleteStyles = {
-    marginTop: '10px',
+    marginTop: '5px',
     borderRadius: '5px',
     width: '40%'
 }
@@ -60,5 +60,5 @@ export const cancelStyles = {
     color: siteStyles.darkBlue,
     marginRight: '5px',
     cursor: 'pointer',
-    marginTop: '-17px'
+    marginTop: '-20px'
 }

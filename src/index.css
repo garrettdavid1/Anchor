@@ -19,6 +19,12 @@ body {
   opacity: 1 !important;
 }
 
+hr{
+  margin: 5px;
+  border-color: darkgray;
+  opacity: .5;
+}
+
 .summarySectionCol:first-child{
   border-left: 1px solid black !important;
 }
@@ -28,8 +34,20 @@ body {
   transition: height 2s;
 }
 
+.option:hover{
+  background-color: #628CCC !important;
+  border: 3px solid #020C4C !important;
+}
+
 #root{
   height: 100vh;
+}
+
+#transactionsTable:last-child tr:nth-child(even) td{
+  background-color: white;
+}
+#transactionsTable:last-child tr:nth-child(odd) td{
+  background-color: lightgray;
 }
 
 .transaction:hover{

@@ -7,13 +7,13 @@ export const styles = {
     marginTop: '10px',
     marginBottom: '10px',
     backgroundColor: siteStyles.widgetBackground,
-    boxShadow: 'black 5px 5px 5px'
+    boxShadow: '3px 3px 3px black'
 }
 
 export const tableStyles = {
     width: '100%',
     border: '1px solid gray',
-    boxShadow: 'black 5px 5px 5px'
+    boxShadow: '3px 3px 3px black'
 }
 
 export const headerRowStyles = {
@@ -25,12 +25,13 @@ export const headerStyles = {
     padding: '2px',
     width: '20%', 
     minWidth: '50px',
-    backgroundColor: siteStyles.gray
+    backgroundColor: siteStyles.darkBlue,
+    color: 'white'
 }
 
 export const cellStyles = {
     textAlign: 'left',
-    backgroundColor: 'white',
+    // backgroundColor: 'white',
     padding: '2px',
     width: '20%', 
     minWidth: '50px',

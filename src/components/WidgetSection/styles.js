@@ -5,12 +5,12 @@ export const styles = {
     fontSize: '1em',
     padding: '0px 10px',
     boxSizing: 'border-box',
-    backgroundColor: siteStyles.mainBackgroundColor
+    // backgroundColor: siteStyles.mainBackgroundColor
 }
 
 export const containerStyles = {
-    backgroundColor: siteStyles.mainBackgroundColor,
-    height: 'calc(86vh - 5px)',
+    // backgroundColor: siteStyles.mainBackgroundColor,
+    height: 'calc(92vh - 5px)',
     overflowY: 'scroll'
 }
 

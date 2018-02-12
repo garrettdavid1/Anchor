@@ -7,5 +7,5 @@ export const styles = {
     marginTop: '10px',
     marginBottom: '10px',
     backgroundColor: siteStyles.widgetBackground,
-    boxShadow: 'black 5px 5px 5px'
+    boxShadow: '3px 3px 3px black'
 }

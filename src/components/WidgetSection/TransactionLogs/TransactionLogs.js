@@ -77,7 +77,7 @@ export class TransactionLogs extends React.Component{
                     uncollapseWidget={this.handleUncollapse} 
                     collapsed={this.state.collapsed}
                     widgetName="transactionLog"/>
-                <table id="transactionsTable" style={tableStyles} className="hidden">
+                <table id="transactionsTable" style={tableStyles} className="hidden table table-striped">
                     <tbody style={headerRowStyles}>
                         <tr>
                             <th style={headerStyles}>Date</th>

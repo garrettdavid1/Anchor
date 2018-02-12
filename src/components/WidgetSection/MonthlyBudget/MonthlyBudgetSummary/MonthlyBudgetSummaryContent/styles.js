@@ -7,7 +7,7 @@ export const styles = {
     padding: '10px',
     boxSizing: 'border-box',
     backgroundColor: siteStyles.blue,
-    boxShadow: '5px 5px 5px black',
+    boxShadow: '3px 3px 3px black',
     border: '1px solid black',
     borderRadius: '5px',
     whiteSpace: 'nowrap',

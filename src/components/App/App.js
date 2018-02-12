@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import { NavSection } from '../NavSection/NavSection';
-import { DateSection } from '../DateSection/DateSection';
+// import { DateSection } from '../DateSection/DateSection';
 import { WidgetSection } from '../WidgetSection/WidgetSection';
 import {styles} from './styles';
 import {shadowStyles} from './styles';
@@ -37,8 +37,8 @@ class App extends Component {
       date: date,
       content: 
         <div style={{height: window.innerHeight + 'px'}}>
-          <NavSection />
-          <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement} />
+          <NavSection date={this.state.date} increment={this.increment} decrement={this.decrement} />
+          {/* <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement} /> */}
           <div style={shadowStyles}></div>
           <WidgetSection widgets={this.widgets} date={this.state.date} />
         </div>
@@ -76,8 +76,8 @@ class App extends Component {
     this.setState({
       content: 
         <div style={{height: window.innerHeight + 'px'}}>
-          <NavSection />
-          <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement} />
+          <NavSection date={this.state.date} increment={this.increment} decrement={this.decrement} />
+          {/* <DateSection date={this.state.date} increment={this.increment} decrement={this.decrement} /> */}
           <div style={shadowStyles}></div>
           <WidgetSection widgets={this.widgets} date={this.state.date} initData={this.state.data} />
         </div>,

@@ -6,7 +6,7 @@ export const styles = {
     width: 'calc(100% / 7)',
     maxWidth: 'calc(100% / 7)',
     backgroundColor: 'white',
-    boxShadow: '5px 5px 5px black'
+    boxShadow: '3px 3px 3px black'
 }
 
 export const dayNumStyles = {
